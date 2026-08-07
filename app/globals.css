@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #6d5ef9;
+  --color-secondary: #a78bfa;
+  --color-accent: #64e6d9;
+  --color-background: #f8fafc;
+  --color-text: #111827;
+  --color-surface: rgba(255,255,255,0.75);
+  --color-border: rgba(15,23,42,0.08);
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #fcfbf8 0%, #f5f0e8 50%, #eef2ff 100%);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(192, 132, 252, 0.3);
+  color: #111827;
+}
+
+/* Hide the native cursor on devices with a precise pointer so the
+   custom Lumora cursor takes over. Touch devices keep the default. */
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  [role="button"] {
+    cursor: none;
+  }
+}
