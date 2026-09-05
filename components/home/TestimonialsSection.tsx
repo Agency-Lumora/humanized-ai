@@ -1,80 +1,90 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { GlassPanel, Section, SectionHeading } from "@/components/ui";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { testimonials } from "@/lib/content";
-import { FiStar } from "react-icons/fi";
+import { useState } from "react";
 
 export function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+
+  const currentTestimonial = testimonials[currentIndex];
+
   return (
-    <Section id="testimonials">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col gap-12"
-      >
-        <SectionHeading
-          eyebrow="Testimonials"
-          title="Trusted by Businesses That Wanted More Than Just a Website."
-          description="Every project is built with one goal—creating a website that earns trust, reflects your brand, and helps your business grow."
-          align="center"
-        />
-        <div className="-mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 xl:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={`${testimonial.name}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.5,
-                ease: "easeOut",
-                delay: index * 0.1,
-              }}
-              whileHover={{ y: -4 }}
-              className="w-[82vw] shrink-0 snap-center md:w-auto"
+    <section id="testimonials" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(3rem,5vw,4.5rem)]">
+      <Container>
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806C5D]">Kind words</p>
+            <h2 className="mt-3 font-serif text-[clamp(2rem,3.5vw,3.25rem)] leading-[1.05] tracking-[-0.03em]">
+              What our clients say.
+            </h2>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={handlePrev}
+              className="flex h-8 w-8 items-center justify-center border border-[#806C5D]/20 transition-colors hover:bg-[#DCE7EA]"
+              aria-label="Previous testimonial"
             >
-              <GlassPanel className="group flex h-full flex-col gap-6 rounded-[30px] p-8 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_25px_70px_rgba(124,92,255,0.18)]">
-                <>
-                  <div className="text-5xl font-black leading-none text-[#7C5CFF]/15">
-                    "
-                  </div>
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="flex h-8 w-8 items-center justify-center bg-[#2A211D] text-[#F4EFE7] transition-colors hover:bg-[#806C5D]"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
 
-                  <div className="mb-2 flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <FiStar
-                        key={i}
-                        className="h-4 w-4 fill-[#7C5CFF] text-[#7C5CFF]"
-                      />
-                    ))}
-                  </div>
-                </>
-
-                <p className="flex-1 text-lg leading-8 text-slate-600 italic">
-                  "{testimonial.content}"
-                </p>
-
-                <div className="flex items-center gap-3 border-t border-slate-200/50 pt-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#7C5CFF] to-[#A78BFA] text-sm font-bold text-white">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <p className="text-base font-bold text-slate-900">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-sm text-slate-500">
-                      {testimonial.role} at {testimonial.company}
+        <div className="mt-[clamp(1.5rem,2.5vw,2rem)] overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-col items-start gap-6 border border-[#806C5D]/20 bg-[#F8F4EE] p-[clamp(1.5rem,3vw,2.5rem)] lg:flex-row lg:items-center lg:justify-between"
+            >
+              <div className="flex max-w-3xl items-start gap-4">
+                <span className="font-serif text-5xl leading-none text-[#AFC4CE]">"</span>
+                <div>
+                  <p className="font-serif text-[clamp(1.05rem,1.5vw,1.35rem)] leading-[1.5] text-[#2A211D]">
+                    {currentTestimonial.content}
+                  </p>
+                  <div className="mt-5 border-t border-[#806C5D]/20 pt-4">
+                    <p className="text-sm font-bold text-[#2A211D]">{currentTestimonial.name}</p>
+                    <p className="mt-1 text-[11px] text-[#806C5D]">
+                      {currentTestimonial.role}, {currentTestimonial.company}
                     </p>
                   </div>
                 </div>
-              </GlassPanel>
+              </div>
+              <div className="shrink-0">
+                <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-[#DCE7EA] lg:h-28 lg:w-28">
+                  {currentTestimonial.avatar && (
+                    <span className="text-2xl font-bold text-[#806C5D] lg:text-3xl">
+                      {currentTestimonial.avatar}
+                    </span>
+                  )}
+                </div>
+              </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
         </div>
-      </motion.div>
-    </Section>
+      </Container>
+    </section>
   );
 }
 

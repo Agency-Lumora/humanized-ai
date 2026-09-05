@@ -1,13 +1,13 @@
 export const colors = {
-  primary: "#6D5EF9",
-  secondary: "#A78BFA",
-  accent: "#64E6D9",
-  background: "#F8FAFC",
-  surface: "rgba(255,255,255,0.75)",
-  text: "#111827",
-  muted: "#64748b",
-  border: "rgba(15,23,42,0.08)",
-  white: "#ffffff",
+  primary: "#2A211D",
+  secondary: "#806C5D",
+  accent: "#AFC4CE",
+  background: "#F4EFE7",
+  surface: "#DCE7EA",
+  text: "#2A211D",
+  muted: "#806C5D",
+  border: "rgba(128,108,93,0.25)",
+  white: "#F4EFE7",
 } as const;
 
 export const typography = {
@@ -52,10 +52,10 @@ export const shadows = {
 } as const;
 
 export const gradients = {
-  aurora: "bg-[linear-gradient(135deg,#f8fafc_0%,#fdf2f8_35%,#ede9fe_65%,#d1fae5_100%)]",
-  brand: "bg-[linear-gradient(135deg,#6D5EF9_0%,#A78BFA_45%,#64E6D9_100%)]",
-  text: "bg-[linear-gradient(135deg,#6D5EF9_0%,#A78BFA_50%,#64E6D9_100%)]",
-  highlight: "bg-[radial-gradient(circle,rgba(109,94,249,0.22),transparent_65%)]",
+  aurora: "bg-[#F4EFE7]",
+  brand: "bg-[linear-gradient(135deg,#AFC4CE_0%,#DCE7EA_50%,#806C5D_100%)]",
+  text: "bg-[linear-gradient(135deg,#AFC4CE_0%,#DCE7EA_52%,#806C5D_100%)]",
+  highlight: "bg-[radial-gradient(circle,rgba(175,196,206,0.32),transparent_65%)]",
 } as const;
 
 export const glass = {

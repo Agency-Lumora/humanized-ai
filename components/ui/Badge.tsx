@@ -10,7 +10,7 @@ interface BadgeProps {
 export function Badge({ children, className = "", tone = "default" }: BadgeProps) {
   const tones = {
     default: cn("border-slate-200 bg-white/85 text-slate-900", shadows.soft),
-    accent: cn("border-[#64E6D9]/30 bg-[#64E6D9]/15 text-slate-900", shadows.glow),
+    accent: cn("border-[#AFC4CE]/50 bg-[#DCE7EA] text-[#2A211D]", shadows.glow),
     soft: cn("border-white/70 bg-white/70 text-slate-600", shadows.soft),
   };
 

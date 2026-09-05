@@ -125,8 +125,8 @@ function Crystal({
       <meshPhysicalMaterial
         color="#8B5CF6"
         transmission={1}
-        thickness={1.8}
-        roughness={0}
+        thickness={1.2}
+        roughness={0.05}
         metalness={0}
         ior={1.45}
         clearcoat={1}
@@ -134,6 +134,7 @@ function Crystal({
         transparent
         opacity={0.95}
         reflectivity={1}
+        envMapIntensity={1.5}
       />
     </mesh>
   );
@@ -147,7 +148,7 @@ export default function LumoraParticles() {
         (Math.random() - 0.5) * 8,
         (Math.random() - 0.5) * 3,
       ] as [number, number, number],
-      scale: Math.random() * 0.12 + 0.05,
+      scale: Math.random() * 0.045 + 0.02,
     }));
   }, []);
 

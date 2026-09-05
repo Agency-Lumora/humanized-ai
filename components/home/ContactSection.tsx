@@ -119,16 +119,15 @@ export function ContactSection() {
         className="flex flex-col gap-12"
       >
         <div className="flex flex-col items-center gap-4 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.32em] text-slate-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-500">
             Get Started
           </p>
-          <h2 className="max-w-3xl text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-            Your Business Deserves A Website That Works.
+          <h2 className="max-w-3xl text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
+            Tell Us What You Need
           </h2>
-          <p className="max-w-2xl text-lg leading-8 text-slate-600">
-            Tell us about your business and we'll recommend the perfect website
-            package. Book a free consultation and let's create something
-            extraordinary together.
+          <p className="max-w-2xl text-sm leading-6 text-slate-600">
+            New website, website fix, branding, or strategy - we will map the
+            right scope and next step.
           </p>
         </div>
 
@@ -137,10 +136,9 @@ export function ContactSection() {
             We Can Build Something Extraordinary
           </h3>*/}
 
-          <p className="mt-2 mb-8 font-semibold text-slate-600">
-            You'll receive a personalized response within 24 hours. Feel free to
-            let us know in the description below if you'd like to get our
-            response via WhatsApp.
+          <p className="mt-2 mb-8 text-sm font-medium text-slate-600">
+            We usually reply within 24 hours. Add your WhatsApp in the message if
+            you prefer a WhatsApp response.
           </p>
 
           <form id="contact-form" className="space-y-7" onSubmit={handleSubmit}>
@@ -292,7 +290,7 @@ export function ContactSection() {
             <Button
               type="submit"
               //variant="primary"
-              className="w-full rounded-2xl bg-gradient-to-r from-[#6D5EF9] to-[#8B7BFF] px-8 py-4 text-lg font-semibold text-white shadow-[0_15px_35px_rgba(109,94,249,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(109,94,249,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-2xl bg-gradient-to-r from-[#6D5EF9] to-[#8B7BFF] px-8 py-4 text-base font-semibold text-white shadow-[0_15px_35px_rgba(109,94,249,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(109,94,249,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
               disabled={loading}
             >
               {loading ? "Submitting..." : "Request Proposal"}

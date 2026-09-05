@@ -11,7 +11,9 @@ interface CrystalParticlesProps {
 
 export function CrystalParticles({ isAssembling, progress }: CrystalParticlesProps) {
   const pointsRef = useRef<THREE.Points>(null);
-  const particleCount = 2800;
+  // Reduce particle count on mobile for better performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const particleCount = isMobile ? 1400 : 2800;
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
@@ -44,11 +46,11 @@ export function CrystalParticles({ isAssembling, progress }: CrystalParticlesPro
     geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     geo.setAttribute("targetPosition", new THREE.BufferAttribute(targetPositions, 3));
 
-    // Colors: gradient of purple to cyan
+    // Colors: Lumora's powder blue, pale blue, cream, and taupe palette
     const colors = new Float32Array(particleCount * 3);
+    const palette = ["#AFC4CE", "#DCE7EA", "#F4EFE7", "#806C5D"];
     for (let i = 0; i < particleCount; i++) {
-      const hue = 0.6 + Math.random() * 0.2; // Purple to blue range
-      const color = new THREE.Color().setHSL(hue, 0.8, 0.6);
+      const color = new THREE.Color(palette[Math.floor(Math.random() * palette.length)]);
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;

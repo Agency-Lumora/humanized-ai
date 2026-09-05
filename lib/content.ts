@@ -18,27 +18,27 @@ export const navItems = ["Services", "Work", "Process"];
 
 export const services: ServiceItem[] = [
   {
-    title: "Premium Website Design",
+    title: "Website Design & Development",
     description:
-      "Modern, responsive websites crafted to reflect your brand, build trust, and leave a lasting first impression.",
+      "New builds or redesigns—clean structure, clear messaging, and built to convert visitors into customers.",
     icon: FiLayers,
   },
   {
-    title: "AI-Powered Solutions",
+    title: "Branding & UI/UX",
     description:
-      "Smart AI integrations including chatbots, automation, and intelligent workflows that improve customer experience.",
-    icon: FiCpu,
-  },
-  {
-    title: "SEO & Performance",
-    description:
-      "Lightning-fast websites optimized for Google, Core Web Vitals, and higher search rankings from day one.",
+      "Logo design, brand identity, and user experience that makes your business feel professional and trustworthy.",
     icon: FiCompass,
   },
   {
-    title: "Growth & Maintenance",
+    title: "SEO & CRM Integration",
     description:
-      "Continuous improvements, analytics, updates, and support to keep your business growing after launch.",
+      "Get found on Google. Connect your forms, pipelines, and follow-ups so leads don't slip through.",
+    icon: FiCpu,
+  },
+  {
+    title: "AI Integration & Growth Support",
+    description:
+      "Add AI for support flows, automation, and lead handling—plus ongoing strategy to help you grow.",
     icon: FiZap,
   },
 ];
@@ -55,7 +55,7 @@ export const featuredWork = [
     title: "Nova Tech Solutions",
     category: "AI SaaS",
     summary:
-      "Premium SaaS website focused on trust, performance, and lead generation.",
+      "Their product was strong but the website was confusing. We clarified the story and tripled demo requests in 30 days.",
     gradient: "from-[#6D5EF9] to-[#9A7CFF]",
     previewHeadline: "AI operations, made effortless.",
     clientName: "Aarav Mehta",
@@ -91,7 +91,7 @@ export const featuredWork = [
     title: "Bloom Wellness",
     category: "Healthcare",
     summary:
-      "Elegant healthcare experience designed to increase appointment bookings.",
+      "Visitors were not booking. We improved trust and booking flow, and online appointments grew 4.2x.",
     gradient: "from-[#64E6D9] to-[#6D5EF9]",
     previewHeadline: "Wellness, on your terms.",
     clientName: "Priya Sharma",
@@ -127,7 +127,7 @@ export const featuredWork = [
     title: "RK Interiors",
     category: "Interior Design",
     summary:
-      "Luxury portfolio website showcasing premium projects with immersive visuals.",
+      "The work looked premium, the website did not. We rebuilt the portfolio and lifted lead quality 5x.",
     gradient: "from-[#8B7CFF] to-[#C6BCFF]",
     previewHeadline: "Spaces with a point of view.",
     clientName: "Rohan Kapoor",
@@ -163,21 +163,21 @@ export const featuredWork = [
 export const process = [
   {
     step: "01",
-    title: "Discover",
+    title: "Tell us what you need",
     description:
-      "We map ambition, product nuance, and market tension to shape a memorable narrative.",
+      "Share your business, your goals, and what's not working. We'll suggest the best path forward.",
   },
   {
     step: "02",
-    title: "Design",
+    title: "We build it with you",
     description:
-      "We build tactile interfaces with elegant systems, motion, and premium details.",
+      "Design, development, branding, integrations—we handle the work and keep you in the loop.",
   },
   {
     step: "03",
-    title: "Launch",
+    title: "You own it",
     description:
-      "We orchestrate rollout, content, and refinement to bring the experience to life.",
+      "After launch, we give you 1 month of free support to teach you how to manage and update it yourself.",
   },
 ];
 
@@ -344,33 +344,63 @@ export interface FAQ {
 
 export const faqs: FAQ[] = [
   {
-    question: "What's the fastest way to reach you?",
+    question: "What does Lumora do?",
     answer:
-      "We usually reply to leads within the first 24 hrs window. Yet WhatsApp is the fastest way to reach us. You can also email us at namrata@agencylumora.com & drishti@agencylumora.com",
+      "We design and develop websites, create branding and logos, build UI/UX, integrate SEO and CRM, add AI where it helps, and provide ongoing growth support. Everything from one team.",
   },
   {
-    question: "How long does a project typically take?",
+    question: "Do you build websites from scratch?",
     answer:
-      "Timeline depends on complexity: Static takes 2 days, Dynamic takes 4 days, E commerce websites takes 2 weeks. Custom projects are discussed case-by-case, so within 4 weeks. We prioritize quality over speed, but deliver fast.",
+      "Yes. We handle strategy, design, development, and launch. You don't need to manage multiple freelancers or agencies.",
   },
   {
-    question: "Do you provide post-launch support?",
+    question: "Can you redesign or fix my existing website?",
     answer:
-      "Yes! Dynamic websites include analytics integration and support. E commerce & Custom includes ongoing optimization and dedicated support. We're with you after launch to ensure success.",
+      "Yes. If your site looks outdated, confuses visitors, or doesn't convert, we rebuild it with better structure, clearer messaging, and stronger trust signals.",
   },
   {
-    question: "Can you integrate with our existing systems?",
+    question: "What happens after my website launches?",
     answer:
-      "Absolutely. Ultra and Enterprise tiers include API connections and custom integrations. If you're on Standard or Pro, we can discuss integration options to fit your needs.(Plan details are given to you on WhatsApp)",
+      "You get 1 month of free support where we teach you how to manage, update, and confidently own your website. After that, any additional changes or support are optional and chargeable. We don't keep you dependent—we give you full control.",
   },
   {
-    question: "Do you offer revisions?",
+    question: "Will I be able to manage my website myself?",
     answer:
-      "Yes. As per our plan you select, we provide 2 to unlimited revisions. We want you to love the final product.",
+      "Yes. That's the goal. During the free 1-month support period, we train you on how to make updates, manage content, and handle basic changes. You'll have full ownership and confidence to run it on your own.",
   },
   {
-    question: "What if we need changes after launch?",
+    question: "Do I have to pay for ongoing support after the first month?",
     answer:
-      "All tiers include a launch-week support period. For ongoing maintenance and updates, we offer separate support packages. Let's discuss what works best for your business.",
+      "Only if you want it. The first month is free and focused on teaching you independence. After that, ongoing support, updates, or new features are optional and charged separately. You're never locked in.",
+  },
+  {
+    question: "Do you handle branding and logo design?",
+    answer:
+      "Yes. We create logos, brand identity, visual direction, and apply it consistently across your website and digital presence.",
+  },
+  {
+    question: "Can you help with SEO and getting found on Google?",
+    answer:
+      "Yes. We build SEO foundations into every website and can provide ongoing SEO support for long-term organic growth.",
+  },
+  {
+    question: "Can you integrate CRM, forms, and automation?",
+    answer:
+      "Yes. We connect your forms, CRM pipelines, email follow-ups, and automation so leads don't slip through and your team does less manual work.",
+  },
+  {
+    question: "Do you add AI to websites?",
+    answer:
+      "Yes, but only when it solves a real problem—like support flows, lead handling, or automation. We don't add AI just for the sake of it.",
+  },
+  {
+    question: "How long does a project take?",
+    answer:
+      "Simple websites can launch in a few days. Custom builds with branding, integrations, and strategy usually take 2-4 weeks. We'll give you a clear timeline upfront.",
+  },
+  {
+    question: "How do I start a project with Lumora?",
+    answer:
+      "Message us on WhatsApp or email with your current website or a brief description of what you need. We'll respond quickly with a clear next step and recommendation.",
   },
 ];

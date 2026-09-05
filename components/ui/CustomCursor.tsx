@@ -83,18 +83,17 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Brand aurora glow that lags farthest behind. Two layered radial
-          gradients (offset from center) blend purple + lavender + teal so the
-          cursor emits the multi-hue Lumora aura instead of flat purple. */}
+      {/* Subtle editorial glow that lags farthest behind. Blends chocolate, 
+          taupe, and powder blue for a refined Lumora aura. */}
       <div
         ref={glowRef}
         aria-hidden
         className="pointer-events-none fixed left-0 top-0 z-[9998] h-56 w-56 rounded-full blur-3xl transition-opacity duration-300 will-change-transform"
         style={{
-          opacity: opacity * (hovering ? 0.9 : 0.65),
+          opacity: opacity * (hovering ? 0.5 : 0.35),
           background:
-            "radial-gradient(circle at 38% 38%, rgba(109,94,249,0.85) 0%, rgba(167,139,250,0.5) 28%, transparent 60%)," +
-            "radial-gradient(circle at 65% 62%, rgba(100,230,217,0.7) 0%, rgba(100,230,217,0.28) 30%, transparent 62%)",
+            "radial-gradient(circle at 38% 38%, rgba(128,108,93,0.45) 0%, rgba(175,196,206,0.35) 28%, transparent 60%)," +
+            "radial-gradient(circle at 65% 62%, rgba(220,231,234,0.4) 0%, rgba(220,231,234,0.2) 30%, transparent 62%)",
         }}
       />
 
@@ -108,11 +107,11 @@ export function CustomCursor() {
           height: hovering ? 56 : 34,
           width: hovering ? 56 : 34,
           borderColor: hovering
-            ? "rgba(100,230,217,0.9)"
-            : "rgba(109,94,249,0.55)",
+            ? "rgba(175,196,206,0.8)"
+            : "rgba(128,108,93,0.5)",
           borderWidth: 1.5,
           background: hovering
-            ? "rgba(167,139,250,0.10)"
+            ? "rgba(220,231,234,0.12)"
             : "transparent",
           transition:
             "height 0.25s ease, width 0.25s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease",
@@ -129,9 +128,9 @@ export function CustomCursor() {
           height: pressed ? 6 : 8,
           width: pressed ? 6 : 8,
           background:
-            "linear-gradient(135deg, #6D5EF9 0%, #A78BFA 50%, #64E6D9 100%)",
+            "linear-gradient(135deg, #2A211D 0%, #806C5D 50%, #AFC4CE 100%)",
           boxShadow:
-            "0 0 10px rgba(109,94,249,0.9), 0 0 22px rgba(100,230,217,0.55)",
+            "0 0 8px rgba(128,108,93,0.6), 0 0 16px rgba(175,196,206,0.4)",
           transition: "height 0.15s ease, width 0.15s ease, opacity 0.3s ease",
         }}
       />

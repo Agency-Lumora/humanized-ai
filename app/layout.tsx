@@ -9,11 +9,15 @@ import ClarityInit from "@/components/ClarityInit";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -21,28 +25,29 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Lumora Digital Agency | Humanized AI Websites for Modern Businesses",
-    template: "%s | Lumora Agency",
+      "Lumora | Website Design, Development & Branding Agency",
+    template: "%s | Lumora",
   },
 
   description:
-    "Lumora designs premium websites for startups, agencies, personal brands, and businesses. Fast, modern, SEO-friendly websites that convert visitors into customers.",
+    "Website design and development, branding, UI/UX, SEO, CRM, and AI integrations. We build with you, then teach you how to own it. 1 month free support included.",
 
   keywords: [
-    "Lumora DIgital Agency",
-    "Digital Agency",
-    "Digital Marketing Agency",
-    "Marketing Agency",
-    "Website Design",
-    "Website Development",
-    "AI Websites",
-    "Landing Pages",
-    "SEO Agency",
-    "Branding",
-    "Business Automation",
-    "UI UX Design",
-    "Web Design India",
-    "Premium Websites",
+    "web design agency",
+    "web development agency",
+    "branding agency",
+    "UI/UX design",
+    "logo design",
+    "brand consultation",
+    "website design",
+    "website development",
+    "AI website development",
+    "SEO services",
+    "CRM integration",
+    "business automation",
+    "digital growth agency",
+    "web design India",
+    "custom web development",
   ],
 
   authors: [{ name: "Namrata Chawla, Drishti Batra" }],
@@ -69,25 +74,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://agencylumora.com",
-    siteName: "Lumora Digital Agency",
-    title: "Lumora Digital Agency | Humanized AI Websites",
+    siteName: "Lumora",
+    title: "Lumora | Website Design, Development & Branding",
     description:
-      "Premium websites, branding, SEO, and AI-powered digital solutions for modern businesses.",
+      "Website design and development, branding, UI/UX, SEO, CRM, and AI integrations. We build with you, then teach you how to own it.",
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Lumora Digital Agency",
+        alt: "Lumora",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Lumora Digital Agency",
+    title: "Lumora | Website Design & Development",
     description:
-      "Premium websites, branding, SEO, and AI-powered digital solutions.",
+      "We build websites you can actually own. Design, development, branding, and 1 month free support.",
     images: ["/opengraph-image.png"],
   },
 
@@ -108,6 +113,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ClarityInit/>
         <CustomCursor />
@@ -126,7 +136,7 @@ export default function RootLayout({
               logo: "https://agencylumora.com/logo.png",
               image: "https://agencylumora.com/og-image.jpg",
               description:
-                "Lumora Digital Agency builds premium Humanized AI-powered websites, branding, SEO, and digital solutions for ambitious businesses.",
+                "Lumora designs and develops websites, creates brand identities, and provides SEO, CRM, and AI integrations. We build with you, then teach you how to manage it yourself with 1 month of free support.",
               email: "hello@agencylumora.com",
               telephone: "+91-7383172979",
               address: {

@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     <div style="font-family:Arial,sans-serif;background:#f8fafc;padding:40px;">
       <div style="max-width:650px;margin:auto;background:white;border-radius:16px;padding:40px;border:1px solid #e5e7eb;">
 
-        <h1 style="margin:0;color:#6D5EF9;">Lumora Digital Agency</h1>
+        <h1 style="margin:0;color:#2A211D;">Lumora Digital Agency</h1>
 
         <p style="margin-top:24px;font-size:18px;">
           A new consultation request has been received.
@@ -93,7 +93,7 @@ export async function POST(req: Request) {
     <div style="font-family:Arial,sans-serif;background:#f8fafc;padding:40px;">
       <div style="max-width:650px;margin:auto;background:white;border-radius:16px;padding:40px;border:1px solid #e5e7eb;">
 
-        <h1 style="color:#6D5EF9;margin-bottom:20px;">
+        <h1 style="color:#2A211D;margin-bottom:20px;">
           Lumora Digital Agency
         </h1>
 

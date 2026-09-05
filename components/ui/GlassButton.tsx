@@ -22,7 +22,7 @@ export function GlassButton(props: GlassButtonProps) {
   const className = props.className ?? "";
 
   const base = cn(
-    "inline-flex items-center justify-center border font-medium transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#6D5EF9]/30",
+    "inline-flex items-center justify-center border font-medium transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#AFC4CE]/50",
     radius.pill,
     shadows.soft,
     size === "sm" ? "px-4 py-2 text-sm" : size === "lg" ? "px-6 py-3.5 text-base" : "px-5 py-3 text-base",

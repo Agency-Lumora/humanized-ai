@@ -31,7 +31,7 @@ export function Typography({
   const toneClasses = {
     default: "text-slate-950",
     muted: "text-slate-500",
-    accent: "text-[#6D5EF9]",
+    accent: "text-[#806C5D]",
   };
 
   return createElement(Component, { className: cn(sizeClasses[size], toneClasses[tone], className), ...props }, children);

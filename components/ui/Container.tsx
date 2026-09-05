@@ -17,7 +17,7 @@ export function Container({
     Tag,
     {
       className: cn(
-        "mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12",
+        "mx-auto w-full max-w-[80rem] px-[clamp(1rem,3vw,3rem)]",
         className
       ),
     },
