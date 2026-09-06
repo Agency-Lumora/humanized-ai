@@ -56,7 +56,7 @@ export const featuredWork = [
     category: "AI SaaS",
     summary:
       "Their product was strong but the website was confusing. We clarified the story and tripled demo requests in 30 days.",
-    gradient: "from-[#6D5EF9] to-[#9A7CFF]",
+    gradient: "from-[#2A211D] to-[#806C5D]",
     previewHeadline: "AI operations, made effortless.",
     clientName: "Aarav Mehta",
     clientRole: "Founder, Nova Tech Solutions",
@@ -92,7 +92,7 @@ export const featuredWork = [
     category: "Healthcare",
     summary:
       "Visitors were not booking. We improved trust and booking flow, and online appointments grew 4.2x.",
-    gradient: "from-[#64E6D9] to-[#6D5EF9]",
+    gradient: "from-[#AFC4CE] to-[#DCE7EA]",
     previewHeadline: "Wellness, on your terms.",
     clientName: "Priya Sharma",
     clientRole: "Owner, Bloom Wellness Clinic",
@@ -128,7 +128,7 @@ export const featuredWork = [
     category: "Interior Design",
     summary:
       "The work looked premium, the website did not. We rebuilt the portfolio and lifted lead quality 5x.",
-    gradient: "from-[#8B7CFF] to-[#C6BCFF]",
+    gradient: "from-[#806C5D] to-[#F4EFE7]",
     previewHeadline: "Spaces with a point of view.",
     clientName: "Rohan Kapoor",
     clientRole: "Director, RK Interiors",
