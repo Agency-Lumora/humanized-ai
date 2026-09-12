@@ -54,6 +54,7 @@ export const featuredWork = [
     slug: "nova-tech-solutions",
     title: "Nova Tech Solutions",
     category: "AI SaaS",
+    tagline: "Product-led website and dashboard experience for an AI operations platform.",
     summary:
       "Their product was strong but the website was confusing. We clarified the story and tripled demo requests in 30 days.",
     gradient: "from-[#2A211D] to-[#806C5D]",
@@ -90,6 +91,7 @@ export const featuredWork = [
     slug: "bloom-wellness",
     title: "Bloom Wellness",
     category: "Healthcare",
+    tagline: "Warm, booking-first website and visual identity for a wellness clinic.",
     summary:
       "Visitors were not booking. We improved trust and booking flow, and online appointments grew 4.2x.",
     gradient: "from-[#AFC4CE] to-[#DCE7EA]",
@@ -126,6 +128,7 @@ export const featuredWork = [
     slug: "rk-interiors",
     title: "RK Interiors",
     category: "Interior Design",
+    tagline: "Website design and digital presence for a premium interior design studio.",
     summary:
       "The work looked premium, the website did not. We rebuilt the portfolio and lifted lead quality 5x.",
     gradient: "from-[#806C5D] to-[#F4EFE7]",

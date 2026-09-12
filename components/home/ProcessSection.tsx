@@ -1,31 +1,61 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Compass, FileText, Code2, Send } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
 const process = [
-  ["Discover", "Understand the business, audience, goals and existing digital ecosystem.", Compass],
-  ["Strategize", "Define the digital strategy, user journey and the right solution.", FileText],
-  ["Design & Develop", "Turn the strategy into the visual experience and build the solution.", Code2],
-  ["Launch & Support", "Launch the solution and provide one month of post-launch support.", Send],
+  ["Discover", "We listen, research, and understand your vision."],
+  ["Strategy", "We map the path from insight to impact."],
+  ["Design", "We craft every pixel with purpose and taste."],
+  ["Develop", "We build fast, responsive, future-ready digital products."],
+  ["Launch & Grow", "We launch, measure, and optimize for lasting growth."],
 ] as const;
 
 export function ProcessSection() {
   return (
-    <section id="process" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(4rem,8vw,6.5rem)]">
+    <section
+      id="process"
+      className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(3.75rem,6vw,5rem)]"
+    >
       <Container>
-        <div className="grid gap-[clamp(2rem,4vw,3.5rem)] min-[1000px]:grid-cols-[0.7fr_1.3fr]">
-          <div><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#806C5D]">Our process</p><h2 className="mt-5 font-serif text-[clamp(2.35rem,4.2vw,4rem)] leading-[0.94] tracking-[-0.04em]">A clear process.<br /><em className="font-normal text-[#806C5D]">A smoother journey.</em></h2><p className="mt-6 max-w-sm text-sm leading-7 text-[#2A211D]/65">Structured enough to create clarity. Collaborative enough to keep your business at the centre.</p></div>
-          <div className="grid border-l border-t border-[#806C5D]/25 sm:grid-cols-2">
-            {process.map(([title, description, Icon], index) => (
-              <motion.article key={title} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="border-b border-r border-[#806C5D]/25 p-[clamp(1.25rem,2.5vw,2rem)]">
-                <div className="flex items-center justify-between"><span className="font-serif text-xl">0{index + 1}</span><Icon className="h-5 w-5 stroke-[1.4]" /></div>
-                <h3 className="mt-7 text-xs font-bold uppercase tracking-[0.16em]">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#2A211D]/65">{description}</p>
-              </motion.article>
-            ))}
-          </div>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6B584B]">
+          <span className="text-[#88C5E8]">03</span>
+          <span className="mx-2 text-[#806C5D]/30">·</span>
+          Our Process
+        </p>
+        <h2 className="mt-2 font-serif text-[clamp(1.5rem,2.5vw,2rem)] leading-[1.2] tracking-[-0.02em] text-[#35251B]">
+          How we create success
+        </h2>
+
+        {/* Timeline */}
+        <div className="relative mt-10">
+          <div className="h-px w-full bg-[#806C5D]/20" />
+          <span className="absolute left-[20%] top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#88C5E8]" />
+        </div>
+
+        {/* Steps */}
+        <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-8">
+          {process.map(([title, description], index) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+            >
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-xl text-[#88C5E8]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-[13px] font-semibold text-[#35251B]">
+                  {title}
+                </h3>
+              </div>
+              <p className="mt-2 text-[12px] leading-5 text-[#6B584B]">
+                {description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </Container>
     </section>

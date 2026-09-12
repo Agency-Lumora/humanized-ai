@@ -1,44 +1,75 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { Container } from "@/components/ui/Container";
 
-const disciplines = ["Strategy", "UX/UI", "Design", "Development", "Technology", "Marketing"];
+const stats = [
+  { value: "50+", label: "Projects Delivered" },
+  { value: "3 Yrs", label: "Of Pure Craft" },
+  { value: "100%", label: "Client Retention" },
+];
 
 export function AboutSection() {
   return (
-    <section id="about" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(4rem,8vw,7rem)]">
-      <Container>
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }} className="grid gap-[clamp(2rem,5vw,4rem)] min-[960px]:grid-cols-[1fr_0.82fr] min-[960px]:items-stretch">
-          <div className="flex flex-col justify-between">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#806C5D]">About Lumora</p>
-              <h2 className="mt-6 max-w-4xl font-serif text-[clamp(2.25rem,4.3vw,4.35rem)] leading-[0.94] tracking-[-0.04em]">
-                We don&apos;t just build websites. We build digital experiences that help businesses <em className="font-normal text-[#806C5D]">connect, convert and grow.</em>
-              </h2>
-            </div>
-            <a href="#services" className="mt-10 inline-flex w-fit items-center gap-2 border-b border-[#2A211D] pb-2 text-xs font-semibold uppercase tracking-[0.14em]">
-              Explore our services <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
-          <div className="min-w-0 bg-[#AFC4CE] p-[clamp(1.25rem,3vw,2.5rem)]">
-            <div className="border border-[#2A211D]/20 bg-[#DCE7EA] p-3 shadow-[0_22px_50px_rgba(42,33,29,0.12)]">
-              <div className="flex gap-1.5 border-b border-[#2A211D]/15 pb-3"><span className="h-1.5 w-1.5 rounded-full bg-[#806C5D]" /><span className="h-1.5 w-1.5 rounded-full bg-[#806C5D]/50" /><span className="h-1.5 w-1.5 rounded-full bg-[#806C5D]/25" /></div>
-              <div className="grid min-h-56 grid-cols-1 gap-3 pt-3 min-[420px]:aspect-[1.35] min-[420px]:grid-cols-[0.75fr_1.25fr]">
-                <div className="bg-[#2A211D] p-4 text-[#F4EFE7]"><p className="font-serif text-2xl leading-none">Built as one connected system.</p><div className="mt-8 h-px bg-[#AFC4CE]" /></div>
-                <div className="grid grid-cols-2 gap-3"><div className="bg-[#F4EFE7] p-3 text-[9px] uppercase tracking-widest">Customer journey</div><div className="bg-[#806C5D] p-3 text-[9px] uppercase tracking-widest text-[#F4EFE7]">Brand trust</div><div className="col-span-2 flex items-end bg-[#F4EFE7] p-4"><div className="h-1/2 w-full border-l border-b border-[#2A211D]/50" /></div></div>
-              </div>
-            </div>
-            <p className="mt-8 text-sm leading-7 text-[#2A211D]/75">
-              Every decision connects back to the business: how customers find you, what makes them trust you, and what helps them take the next step.
+    <section
+      id="about"
+      className="relative overflow-hidden border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(3rem,6vw,4.5rem)]"
+    >
+      <div className="mx-auto max-w-[80rem] px-6 sm:px-8 lg:px-12">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
+          {/* Image */}
+          {/* TODO: replace this placeholder with a real studio/team photo
+              asset once one is available (no suitable existing image asset
+              was found in the project). */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+            className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#DCE7EA] to-[#AFC4CE]"
+          />
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6B584B]">
+              <span className="text-[#88C5E8]">04</span>
+              <span className="mx-2 text-[#806C5D]/30">·</span>
+              About Lumora
             </p>
-            <div className="mt-8 grid grid-cols-2 border-l border-t border-[#2A211D]/20 sm:grid-cols-3">
-              {disciplines.map((item, index) => <span key={item} className="border-b border-r border-[#2A211D]/20 px-3 py-4 text-[10px] font-semibold uppercase tracking-[0.14em]">0{index + 1} {item}</span>)}
+
+            <h2 className="mt-3 max-w-lg font-serif text-[clamp(1.75rem,2.75vw,2.25rem)] leading-[1.2] tracking-[-0.02em] text-[#35251B]">
+              A small studio with big ambitions.
+            </h2>
+
+            <p className="mt-5 max-w-[520px] text-sm leading-7 text-[#6B584B]">
+              Founded in Surat, Gujarat, Lumora is a team of designers,
+              developers, and strategists who believe great design is the
+              shortest distance between a brand and its audience. We blend
+              creativity with technology to build digital experiences that
+              matter.
+            </p>
+
+            <div className="mt-8 h-px w-full max-w-[520px] bg-[#806C5D]/20" />
+
+            <div className="mt-6 flex max-w-[520px] items-start justify-between gap-6">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-serif text-2xl text-[#35251B] sm:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#6B584B]">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
             </div>
-          </div>
-        </motion.div>
-      </Container>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
