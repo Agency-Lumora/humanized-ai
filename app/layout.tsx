@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -16,6 +16,25 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
+
+// Used only by the Hero section's editorial redesign, scoped via the
+// --font-cormorant / --font-dm-sans CSS variables rather than replacing the
+// site-wide --font-sans / .font-serif tokens used elsewhere on the site.
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  preload: true,
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
   display: "swap",
   preload: true,
 });
@@ -111,7 +130,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorantGaramond.variable} ${dmSans.variable} h-full antialiased`}
     >
       <head>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

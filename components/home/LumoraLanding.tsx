@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { LoadingScreen } from "@/components/three/LoadingScreen";
-import { FloatingNav } from "@/components/ui";
 import { useLenis } from "@/hooks/useLenis";
 import { HeroSection } from "./HeroSection";
 import { BrandsSection } from "./BrandsSection";
@@ -29,8 +28,7 @@ export function LumoraLanding() {
     <>
       {isMounted && showLoading && <LoadingScreen onComplete={() => setShowLoading(false)} duration={1.8} />}
       <div className="min-h-screen bg-[#F4EFE7] text-[#2A211D]">
-        <FloatingNav />
-        <main id="top">
+        <main>
           <HeroSection />
           <BrandsSection />
           <ServicesSection />
