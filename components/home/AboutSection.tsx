@@ -24,7 +24,8 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            data-motion-reveal
             className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#DCE7EA] to-[#AFC4CE]"
           />
 
@@ -33,24 +34,27 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 1.05, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+            data-motion-reveal
           >
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6B584B]">
               <span className="text-[#88C5E8]">04</span>
               <span className="mx-2 text-[#806C5D]/30">·</span>
-              About Lumora
+              Why us
             </p>
 
             <h2 className="mt-3 max-w-lg font-serif text-[clamp(1.75rem,2.75vw,2.25rem)] leading-[1.2] tracking-[-0.02em] text-[#35251B]">
-              A small studio with big ambitions.
+              Not a vendor. A growth partner.
             </h2>
 
             <p className="mt-5 max-w-[520px] text-sm leading-7 text-[#6B584B]">
-              Founded in Surat, Gujarat, Lumora is a team of designers,
-              developers, and strategists who believe great design is the
-              shortest distance between a brand and its audience. We blend
-              creativity with technology to build digital experiences that
-              matter.
+              We&apos;re a Surat-based digital agency that works the way a great in-house team would invested in your outcomes, not your invoice total. We think about your business before we touch the brief.
+            </p>
+
+            <p className="mt-5 max-w-[520px] text-sm leading-7 text-[#6B584B]">
+              We&apos;ve seen what basic agencies do. We built something different.
+              <br />
+              Pretty decks. Missed deadlines. No strategy behind the scroll animations. We started this agency because the founders we were working with deserved better. Still do.
             </p>
 
             <div className="mt-8 h-px w-full max-w-[520px] bg-[#806C5D]/20" />

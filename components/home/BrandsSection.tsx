@@ -18,7 +18,7 @@ export function BrandsSection() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.95 }}
           className="text-center text-[9px] font-medium uppercase tracking-[0.28em] text-[#6B584B]"
         >
           Partnering with brands that dare to stand out.
@@ -28,16 +28,24 @@ export function BrandsSection() {
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ duration: 1, delay: 0.12 }}
           className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 sm:justify-between"
         >
-          {brands.map((brand) => (
-            <div key={brand} className="flex items-center gap-2">
+          {brands.map((brand, index) => (
+            <motion.div
+              key={brand}
+              className="flex items-center gap-2"
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.9, delay: index * 0.1 }}
+              whileHover={{ y: -2 }}
+            >
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#88C5E8]" />
               <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B584B]">
                 {brand}
               </span>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

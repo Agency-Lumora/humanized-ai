@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MotionConfig } from "framer-motion";
 import { LoadingScreen } from "@/components/three/LoadingScreen";
 import { useLenis } from "@/hooks/useLenis";
 import { HeroSection } from "./HeroSection";
@@ -25,7 +26,9 @@ export function LumoraLanding() {
   }, []);
 
   return (
-    <>
+    <MotionConfig
+      transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+    >
       {isMounted && showLoading && <LoadingScreen onComplete={() => setShowLoading(false)} duration={1.8} />}
       <div className="min-h-screen bg-[#F4EFE7] text-[#2A211D]">
         <main>
@@ -42,7 +45,7 @@ export function LumoraLanding() {
         </main>
         <Footer />
       </div>
-    </>
+    </MotionConfig>
   );
 }
 

@@ -11,7 +11,7 @@ export default function CTASection() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.95 }}
         className="relative overflow-hidden rounded-[40px] border border-violet-200/50 bg-gradient-to-br from-white to-violet-50 px-8 py-20 text-center shadow-[0_30px_100px_rgba(124,92,255,0.12)]"
       >
         <div className="absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-violet-400/10 blur-[120px]" />
@@ -21,7 +21,7 @@ export default function CTASection() {
             LET'S BUILD SOMETHING AMAZING
           </p>
 
-          <h2 className="text-4xl font-black text-slate-900 md:text-5xl">
+          <h2 className="text-[clamp(1.75rem,2.75vw,2.25rem)] font-black leading-[1.2] text-slate-900">
             Your Business Deserves
             <br />
             A Website That Works.

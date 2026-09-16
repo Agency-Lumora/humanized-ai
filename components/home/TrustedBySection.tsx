@@ -11,7 +11,7 @@ export function TrustedBySection() {
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
         className="flex flex-col gap-12"
       >
         <SectionHeading
@@ -28,7 +28,7 @@ export function TrustedBySection() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="flex items-center gap-2"
             >
               <div className="h-8 w-1 rounded-full bg-linear-to-b from-[#6D5EF9] to-[#64E6D9]" />

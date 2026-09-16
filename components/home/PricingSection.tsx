@@ -12,7 +12,7 @@ export function PricingSection() {
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
         className="flex flex-col gap-12"
       >
         <SectionHeading
@@ -29,7 +29,7 @@ export function PricingSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+              transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1], delay: index * 0.12 }}
               whileHover={tier.highlighted ? { y: -8 } : { y: -4 }}
               className="group w-[82vw] shrink-0 snap-center md:w-auto"
             >
@@ -84,7 +84,7 @@ export function PricingSection() {
   initial={{ opacity: 0, y: 20 }}
   whileInView={{ opacity: 1, y: 0 }}
   viewport={{ once: true }}
-  transition={{ duration: 0.6 }}
+  transition={{ duration: 0.95 }}
   className="rounded-[36px] border border-violet-200/60 bg-gradient-to-br from-white to-violet-50 p-12 text-center shadow-[0_25px_80px_rgba(124,92,255,0.12)]"
 >
   <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-[#7C5CFF]">

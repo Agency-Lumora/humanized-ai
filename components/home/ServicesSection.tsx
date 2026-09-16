@@ -49,10 +49,13 @@ function ServiceCell({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{
-        duration: 0.55,
-        delay: (index % 3) * 0.06,
+        duration: 0.95,
+        delay: (index % 3) * 0.12,
         ease: [0.22, 1, 0.36, 1],
       }}
+      data-motion-reveal
+      whileHover={{ y: -4, scale: 1.008 }}
+      whileTap={{ scale: 0.995 }}
       className="
         group
         relative
@@ -174,9 +177,10 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{
-            duration: 0.65,
+            duration: 1,
             ease: [0.22, 1, 0.36, 1],
           }}
+          data-motion-reveal
           className="
             flex
             flex-col
@@ -207,8 +211,8 @@ export function ServicesSection() {
             <h2
               className="
                 mt-5
-                whitespace-nowrap
-                text-[clamp(1.75rem,2.5vw,2.25rem)]
+                sm:whitespace-nowrap
+                text-[clamp(1.75rem,2.75vw,2.25rem)]
                 font-normal
                 leading-[1.2]
                 tracking-[-0.025em]

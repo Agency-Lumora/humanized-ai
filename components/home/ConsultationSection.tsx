@@ -1,90 +1,100 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-function MagneticButton({ children, href }: { children: React.ReactNode; href: string }) {
-  const ref = useRef<HTMLAnchorElement>(null);
+function NextToNowWord() {
+  const wordRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(wordRef, { once: true, amount: 0.8 });
+  const [isStruck, setIsStruck] = useState(false);
+  const [typedNow, setTypedNow] = useState("");
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const strikeTimer = window.setTimeout(() => setIsStruck(true), 650);
+    const typeTimer = window.setTimeout(() => {
+      let characterIndex = 0;
+      const interval = window.setInterval(() => {
+        characterIndex += 1;
+        setTypedNow("NOW".slice(0, characterIndex));
+
+        if (characterIndex === 3) window.clearInterval(interval);
+      }, 170);
+
+      return () => window.clearInterval(interval);
+    }, 1250);
+
+    return () => {
+      window.clearTimeout(strikeTimer);
+      window.clearTimeout(typeTimer);
+    };
+  }, [isInView]);
+
+  return (
+    <span ref={wordRef} className="inline-block">
+      <span className="relative inline-block min-w-[3.2ch]">
+        <span className={typedNow ? "text-[#F4EFE7]/45" : undefined}>NEXT</span>
+        <motion.span
+          aria-hidden="true"
+          className="absolute left-0 top-1/2 h-[0.07em] w-full origin-left bg-[#AFC4CE]"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: isStruck ? 1 : 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        />
+      </span>
+      ? <span className="text-[#AFC4CE]">{typedNow}</span>
+      {typedNow && typedNow.length < 3 ? (
+        <span className="ml-0.5 inline-block h-[0.8em] w-px bg-[#AFC4CE] align-baseline opacity-80" />
+      ) : null}
+    </span>
+  );
+}
+
+function CTAButton({ children, href }: { children: React.ReactNode; href: string }) {
   const [isHovered, setIsHovered] = useState(false);
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  
-  const springConfig = { damping: 20, stiffness: 300 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.35);
-    y.set((e.clientY - centerY) * 0.35);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
+  const reducedMotion = useReducedMotion();
+  const transition = { duration: reducedMotion ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
     <motion.a
-      ref={ref}
       href={href}
       target="_blank"
       rel="noreferrer"
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
-      className="group relative inline-block"
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
+      className="group relative inline-block w-full sm:w-auto"
     >
       <motion.div
-        className="relative z-10 overflow-hidden bg-[#AFC4CE] px-10 py-6"
+        className="relative z-10 flex min-h-[68px] w-full min-w-0 items-center justify-center gap-5 border border-transparent px-7 py-4 text-[#2A211D] sm:min-w-[340px] sm:px-9"
         animate={{
-          backgroundColor: isHovered ? "#DCE7EA" : "#AFC4CE",
+          backgroundColor: isHovered ? "#F4EFE7" : "#AFC4CE",
+          borderColor: isHovered ? "rgba(128, 108, 93, 0.5)" : "rgba(128, 108, 93, 0)",
         }}
-        transition={{ duration: 0.4 }}
+        transition={transition}
       >
-        <div className="relative z-10 flex items-center gap-4">
-          <span className="text-sm font-bold uppercase tracking-[0.15em] text-[#2A211D]">
-            {children}
-          </span>
+        <span className="text-[13px] font-bold uppercase tracking-[0.16em]">
+          {children}
+        </span>
+        <motion.div
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-lg"
+          animate={{
+            scale: isHovered ? 1 : 0.8,
+            backgroundColor: isHovered ? "#AFC4CE" : "rgba(175, 196, 206, 0)",
+          }}
+          transition={transition}
+        >
           <motion.span
-            className="text-xl text-[#2A211D]"
-            animate={{
-              x: isHovered ? 5 : 0,
-              y: isHovered ? -5 : 0,
-            }}
-            transition={{ duration: 0.3 }}
+            animate={{ x: 0, rotate: 0 }}
+            transition={transition}
+            aria-hidden="true"
           >
             →
           </motion.span>
-        </div>
-
-        {/* Animated background */}
-        <motion.div
-          className="absolute inset-0 bg-[#2A211D]"
-          initial={{ x: "-100%", y: "-100%" }}
-          animate={{
-            x: isHovered ? "0%" : "-100%",
-            y: isHovered ? "0%" : "-100%",
-          }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        />
+        </motion.div>
       </motion.div>
-
-      {/* Shadow effect */}
-      <motion.div
-        className="absolute inset-0 -z-10 bg-[#806C5D]"
-        animate={{
-          x: isHovered ? 8 : 4,
-          y: isHovered ? 8 : 4,
-        }}
-        transition={{ duration: 0.3 }}
-      />
     </motion.a>
   );
 }
@@ -129,10 +139,10 @@ export default function ConsultationSection() {
               Ready to start?
             </p>
             <h2 className="mx-auto mt-4 max-w-5xl font-serif text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] tracking-[-0.03em] text-[#F4EFE7]">
-              YOUR NEXT
+              WHAT SHOULD WE
             </h2>
             <h2 className="mx-auto max-w-5xl font-serif text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] tracking-[-0.03em] text-[#AFC4CE]">
-              DIGITAL MOVE?
+              BUILD <NextToNowWord />
             </h2>
           </motion.div>
 
@@ -144,9 +154,8 @@ export default function ConsultationSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mx-auto mt-6 max-w-2xl text-base leading-7 text-[#F4EFE7]/70"
           >
-            Let&apos;s create something people remember.
-            <br />
-            Tell us about your vision, and we&apos;ll help bring it to life.
+            Your competitors aren&apos;t waiting. You shouldn&apos;t either.
+            
           </motion.p>
 
           {/* CTA Button */}
@@ -157,9 +166,9 @@ export default function ConsultationSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-8"
           >
-            <MagneticButton href="https://wa.me/917383172979?text=Hi%20Lumora,%20I'd%20like%20to%20discuss%20a%20project.">
-              Start a project
-            </MagneticButton>
+            <CTAButton href="https://wa.me/917383172979?text=Hi%20Lumora,%20I'd%20like%20to%20discuss%20a%20project.">
+              Now or Never
+            </CTAButton>
           </motion.div>
 
           {/* Bottom note */}
@@ -170,9 +179,7 @@ export default function ConsultationSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-8 flex items-center justify-center gap-8 text-xs text-[#F4EFE7]/50"
           >
-            <span>Free consultation included</span>
-            <span className="h-1 w-1 rounded-full bg-[#F4EFE7]/30" />
-            <span>Response within 24 hours</span>
+            <span>Systems built for businesses that don&apos;t have time to stay small.</span>
           </motion.div>
         </div>
       </div>

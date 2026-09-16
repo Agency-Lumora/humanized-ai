@@ -25,7 +25,7 @@ export function TestimonialsSection() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806C5D]">Kind words</p>
-            <h2 className="mt-3 font-serif text-[clamp(2rem,3.5vw,3.25rem)] leading-[1.05] tracking-[-0.03em]">
+            <h2 className="mt-3 font-serif text-[clamp(1.75rem,2.75vw,2.25rem)] leading-[1.2] tracking-[-0.02em]">
               What our clients say.
             </h2>
           </div>
@@ -54,7 +54,7 @@ export function TestimonialsSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-start gap-6 border border-[#806C5D]/20 bg-[#F8F4EE] p-[clamp(1.5rem,3vw,2.5rem)] lg:flex-row lg:items-center lg:justify-between"
             >
               <div className="flex max-w-3xl items-start gap-4">

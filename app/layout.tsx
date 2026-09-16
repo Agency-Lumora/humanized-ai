@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -20,31 +20,11 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
-// Used only by the Hero section's editorial redesign, scoped via the
-// --font-cormorant / --font-dm-sans CSS variables rather than replacing the
-// site-wide --font-sans / .font-serif tokens used elsewhere on the site.
-const cormorantGaramond = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  preload: true,
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  display: "swap",
-  preload: true,
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://agencylumora.com"),
 
   title: {
-    default:
-      "Lumora | Website Design, Development & Branding Agency",
+    default: "Lumora Agency | Surat | Strategy · Design · Development · Growth",
     template: "%s | Lumora",
   },
 
@@ -116,9 +96,9 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/icon.png",
+    icon: "/favicon.ico?v=2026-09-14",
+    shortcut: "/favicon.ico?v=2026-09-14",
+    apple: "/icon.png?v=2026-09-14",
   },
 };
 
@@ -130,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${cormorantGaramond.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

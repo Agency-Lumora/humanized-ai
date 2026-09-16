@@ -8,6 +8,8 @@
   --color-text: #2a211d;
   --color-surface: #dce7ea;
   --color-border: rgba(128, 108, 93, 0.25);
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration: 0.95s;
 }
 
 @theme inline {
@@ -39,7 +41,22 @@ body {
 }
 
 .font-serif {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+/* Keep text and visual reveals calm and consistent across the page. */
+[data-motion-reveal] {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion-reveal] {
+    transition:
+      opacity var(--motion-duration) var(--motion-ease),
+      transform var(--motion-duration) var(--motion-ease);
+  }
 }
 
 section {
@@ -117,5 +134,20 @@ html.lenis {
 @media (prefers-reduced-motion: reduce) {
   .orbital-logo {
     animation: none;
+  }
+}
+
+
+/* Lumora Process section */
+#process button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #process *,
+  #process *::before,
+  #process *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

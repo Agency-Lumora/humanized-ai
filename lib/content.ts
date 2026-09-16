@@ -347,63 +347,28 @@ export interface FAQ {
 
 export const faqs: FAQ[] = [
   {
-    question: "What does Lumora do?",
+    question: "What does Lumora Agency in Surat actually do?",
     answer:
-      "We design and develop websites, create branding and logos, build UI/UX, integrate SEO and CRM, add AI where it helps, and provide ongoing growth support. Everything from one team.",
+      "We handle your website, brand identity, SEO, paid ads, AI automations, and CRM everything between \"we need to grow online\" and \"we're growing online.\"",
   },
   {
-    question: "Do you build websites from scratch?",
+    question: "How is your agency different from a freelancer or a large agency?",
     answer:
-      "Yes. We handle strategy, design, development, and launch. You don't need to manage multiple freelancers or agencies.",
+      "Freelancers give you execution without strategy. Large agencies give you strategy without attention. We give you both with a team that treats your business like it's our own.",
   },
   {
-    question: "Can you redesign or fix my existing website?",
+    question: "Do you work with businesses outside Surat?",
     answer:
-      "Yes. If your site looks outdated, confuses visitors, or doesn't convert, we rebuild it with better structure, clearer messaging, and stronger trust signals.",
+      "Yes, we work with brands across Gujarat, Mumbai, Bangalore and beyond. We're based in Surat, but our clients are wherever growth needs to happen.",
   },
   {
-    question: "What happens after my website launches?",
+    question: "How long does it take to build a website with your agency?",
     answer:
-      "You get 1 month of free support where we teach you how to manage, update, and confidently own your website. After that, any additional changes or support are optional and chargeable. We don't keep you dependent—we give you full control.",
+      "A standard brochure website takes 1 week. A full-scale web app or e-commerce platform takes 2-3 weeks. We give you a clear timeline before we start.",
   },
   {
-    question: "Will I be able to manage my website myself?",
+    question: "Can you help with AI automation if we've never used it before?",
     answer:
-      "Yes. That's the goal. During the free 1-month support period, we train you on how to make updates, manage content, and handle basic changes. You'll have full ownership and confidence to run it on your own.",
-  },
-  {
-    question: "Do I have to pay for ongoing support after the first month?",
-    answer:
-      "Only if you want it. The first month is free and focused on teaching you independence. After that, ongoing support, updates, or new features are optional and charged separately. You're never locked in.",
-  },
-  {
-    question: "Do you handle branding and logo design?",
-    answer:
-      "Yes. We create logos, brand identity, visual direction, and apply it consistently across your website and digital presence.",
-  },
-  {
-    question: "Can you help with SEO and getting found on Google?",
-    answer:
-      "Yes. We build SEO foundations into every website and can provide ongoing SEO support for long-term organic growth.",
-  },
-  {
-    question: "Can you integrate CRM, forms, and automation?",
-    answer:
-      "Yes. We connect your forms, CRM pipelines, email follow-ups, and automation so leads don't slip through and your team does less manual work.",
-  },
-  {
-    question: "Do you add AI to websites?",
-    answer:
-      "Yes, but only when it solves a real problem—like support flows, lead handling, or automation. We don't add AI just for the sake of it.",
-  },
-  {
-    question: "How long does a project take?",
-    answer:
-      "Simple websites can launch in a few days. Custom builds with branding, integrations, and strategy usually take 2-4 weeks. We'll give you a clear timeline upfront.",
-  },
-  {
-    question: "How do I start a project with Lumora?",
-    answer:
-      "Message us on WhatsApp or email with your current website or a brief description of what you need. We'll respond quickly with a clear next step and recommendation.",
+      "That's exactly who we build it for. We map your existing workflows, identify what should be automated, and build systems that work without needing you to understand the tech.",
   },
 ];

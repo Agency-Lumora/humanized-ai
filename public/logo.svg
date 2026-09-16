@@ -1,18 +1,12 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="logoCircleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#2A211D;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#806C5D;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#AFC4CE;stop-opacity:1" />
-    </linearGradient>
+    <radialGradient id="logoGradient" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#d9b18f"/>
+      <stop offset="35%" stop-color="#bb8f6a"/>
+      <stop offset="100%" stop-color="#352b27"/>
+    </radialGradient>
   </defs>
-  
-  <!-- Background circle with chocolate to powder blue gradient -->
-  <circle cx="256" cy="256" r="240" fill="url(#logoCircleGradient)"/>
 
-  <!-- Cream diamond in center -->
-  <polygon
-    points="256,112 368,256 256,400 144,256"
-    fill="#F4EFE7"
-  />
+  <circle cx="256" cy="256" r="246" fill="url(#logoGradient)"/>
+  <path d="M256 96L372 212L256 416L140 212L256 96Z" fill="#F4EFE7"/>
 </svg>

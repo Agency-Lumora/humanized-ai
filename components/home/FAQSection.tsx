@@ -18,7 +18,7 @@ export function FAQSection() {
       <Container>
         <div className="mb-[clamp(1.5rem,2.5vw,2rem)]">
           <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806C5D]">Common questions</p>
-          <h2 className="mt-3 font-serif text-[clamp(2rem,3.5vw,3.25rem)] leading-[1.05] tracking-[-0.03em]">
+          <h2 className="mt-3 font-serif text-[clamp(1.75rem,2.75vw,2.25rem)] leading-[1.2] tracking-[-0.02em]">
             Everything you need to know.
           </h2>
         </div>
@@ -31,6 +31,7 @@ export function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
+              whileHover={{ y: -2 }}
               className="border border-[#806C5D]/20 bg-[#F8F4EE]"
             >
               <button

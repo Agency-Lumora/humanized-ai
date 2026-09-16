@@ -1,304 +1,82 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button, GlassPanel, Section } from "@/components/ui";
-import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
-import { getSupabase } from "@/lib/supabase";
-import { useEffect, useState } from "react";
+import { ArrowRight, Camera, Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
+import { countryNameFromCode } from "@/lib/countries";
+import { getSupabase } from "@/lib/supabase";
 import { useGeo } from "@/hooks/useGeo";
-import { countries, countryNameFromCode } from "@/lib/countries";
 
-const BUDGET_OPTIONS: Record<"INR" | "USD", string[]> = {
-  INR: [
-    "Basic Static ₹15k - ₹20k",
-    "Basic Dynamic ₹20k - ₹25k",
-    "E-Commerce ₹30k - ₹50k",
-    "Custom ₹50k+",
-  ],
-  USD: [
-    "Basic Static $500 - $900",
-    "Basic Dynamic $900 - $1,800",
-    "E-Commerce $2,000 - $4,500",
-    "Custom $5,000+",
-  ],
-};
+const inputClassName = "mt-2 w-full rounded-[9px] border border-[#806C5D]/16 bg-[#F4EFE7]/45 px-4 py-3.5 text-[13px] text-[#2A211D] outline-none transition duration-300 placeholder:text-[#806C5D]/45 focus:border-[#88C5E8] focus:bg-white focus:ring-4 focus:ring-[#88C5E8]/12";
+
+const contactItems = [
+  { label: "Our office", value: "Surat, India", detail: "We work with clients globally", Icon: MapPin },
+  { label: "Email us", value: "hello@lumora.agency", detail: "", Icon: Mail, href: "mailto: hello@lumora.agency" },
+
+];
 
 export function ContactSection() {
-  const { country: detectedCountry, currency } = useGeo();
-
-  const [formData, setFormData] = useState({
-    full_name: "",
-    business_name: "",
-    email: "",
-    phone: "",
-    website: "",
-    business_type: "",
-    country: "",
-    budget: "",
-    message: "",
-  });
-
-  // Pre-fill the Country field with the geo-detected country once it resolves,
-  // but only if the user hasn't already chosen one. The field stays editable and
-  // required, so the submitted value is the client's verified location.
-  useEffect(() => {
-    const detectedName = countryNameFromCode(detectedCountry);
-    if (detectedName) {
-      setFormData((prev) =>
-        prev.country ? prev : { ...prev, country: detectedName },
-      );
-    }
-  }, [detectedCountry]);
-
+  const { country: detectedCountry } = useGeo();
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ full_name: "", business_name: "", phone: "", email: "", business_type: "", message: "" });
+  const updateField = (field: keyof typeof formData, value: string) => setFormData((current) => ({ ...current, [field]: value }));
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
-
-    const { error } = await getSupabase().from("leads").insert([
-      {
-        full_name: formData.full_name,
-        business_name: formData.business_name,
-        email: formData.email,
-        phone: formData.phone,
-        website: formData.website,
-        business_type: formData.business_type,
-        country: formData.country,
-        budget: formData.budget,
-        message: formData.message,
-      },
-    ]);
-
-    setLoading(false);
-
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (!response.ok) {
-      toast.error("Your request was saved, but the email notification failed.");
-      return;
-    }
-
-    toast.success(
-      "Proposal received successfully! We'll contact you within 24 hours.",
-    );
-
-    setFormData({
-      full_name: "",
-      business_name: "",
-      email: "",
-      phone: "",
-      website: "",
-      business_type: "",
-      country: "",
-      budget: "",
-      message: "",
-    });
+    const payload = { ...formData, website: "", country: countryNameFromCode(detectedCountry) || "India", budget: "To be discussed", selected_plan: formData.business_type };
+    try {
+      const { error } = await getSupabase().from("leads").insert([payload]);
+      if (error) throw error;
+      const response = await fetch("/api/send-email", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (!response.ok) { toast.error("Your request was saved, but the email notification failed."); return; }
+      toast.success("Message received. We’ll be in touch within 24 hours.");
+      setFormData({ full_name: "", business_name: "", phone: "", email: "", business_type: "", message: "" });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+    } finally { setLoading(false); }
   };
 
   return (
-    <Section id="contact">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col gap-12"
-      >
-        <div className="flex flex-col items-center gap-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-500">
-            Get Started
-          </p>
-          <h2 className="max-w-3xl text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
-            Tell Us What You Need
-          </h2>
-          <p className="max-w-2xl text-sm leading-6 text-slate-600">
-            New website, website fix, branding, or strategy - we will map the
-            right scope and next step.
-          </p>
-        </div>
+    <section id="consultation" className="relative overflow-hidden bg-[#F4EFE7] py-[clamp(3.5rem,7vw,6.5rem)]">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-6 sm:px-10 lg:grid-cols-[minmax(0,.78fr)_minmax(0,1fr)] lg:items-center lg:gap-14 lg:px-12 xl:grid-cols-[minmax(300px,.78fr)_minmax(470px,1fr)_230px] xl:gap-10">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }} className="relative z-10 max-w-[390px]">
+          <p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.22em] text-[#6EA9C7]"><span className="h-px w-10 bg-[#6EA9C7]/60" />Get in touch</p>
+          <h1 className="mt-6 font-serif text-[clamp(3rem,5.2vw,4.6rem)] leading-[0.93] tracking-[-0.05em] text-[#2A211D]">Let&apos;s build<br />something great.<br /><span className="text-[#6EA9C7]">together.</span></h1>
+          <p className="mt-7 max-w-[350px] text-[13px] leading-6 text-[#2A211D]/60">Have a project in mind, a question, or just want to say hello? We&apos;d love to hear from you. Fill out the form or reach us directly below.</p>
+          <div className="mt-8 space-y-5">
+            {contactItems.map(({ label, value, detail, Icon, href }) => {
+              const content = <><p className="font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-[#806C5D]">{label}</p><p className="mt-1 text-[12px] text-[#2A211D]/72">{value}</p>{detail && <p className="mt-0.5 text-[10px] text-[#2A211D]/48">{detail}</p>}</>;
+              return <div key={label} className="flex items-start gap-4"><Icon className="mt-1 h-[18px] w-[18px] shrink-0 text-[#2A211D]/75" strokeWidth={1.6} />{href ? <a href={href} className="transition-colors hover:text-[#6EA9C7]">{content}</a> : <div>{content}</div>}</div>;
+            })}
+            <div className="flex items-start gap-4"><Camera className="mt-1 h-[18px] w-[18px] shrink-0 text-[#2A211D]/75" strokeWidth={1.6} /><div><p className="font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-[#806C5D]">Follow us</p><div className="mt-1 flex gap-3 text-[12px] text-[#2A211D]/72"><a className="hover:text-[#6EA9C7]" href="https://www.instagram.com/curatewithlumora/?__pwa=1">Instagram</a><span>/</span><a className="hover:text-[#6EA9C7]" href="https://www.linkedin.com/in/namratachawla05/">LinkedIn</a><span>/</span><a className="hover:text-[#6EA9C7]" href="https://www.behance.net/">Behance</a></div></div></div>
+          </div>
+          <div className="mt-10 w-fit -rotate-[12deg] text-[#6EA9C7]">
+            <p className="font-serif text-[13px] italic leading-[0.92]">Let&apos;s create<br />something amazing</p>
+            <svg className="ml-14 mt-0.5 h-5 w-16" viewBox="0 0 64 20" fill="none"><path d="M2 4c14 10 33 12 49 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" /><path d="m47 7 5 4-6 2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </div>
+        </motion.div>
 
-        <GlassPanel className="p-8 lg:p-10">
-          {/*<h3 className="text-3xl font-semibold text-slate-950">
-            We Can Build Something Extraordinary
-          </h3>*/}
+        <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }} className="relative z-10 rounded-[15px] border border-white/90 bg-white/70 p-5 shadow-[0_22px_55px_rgba(42,33,29,0.08)] backdrop-blur-sm sm:p-8">
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.22em] text-[#6EA9C7]">Send us a message</p>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+            <label className="text-[11px] text-[#2A211D]/70">Name <span className="text-[#6EA9C7]">*</span><input className={inputClassName} required value={formData.full_name} onChange={(event) => updateField("full_name", event.target.value)} placeholder="Your name" /></label>
+            <label className="text-[11px] text-[#2A211D]/70">Company Name <span className="text-[#6EA9C7]">*</span><input className={inputClassName} required value={formData.business_name} onChange={(event) => updateField("business_name", event.target.value)} placeholder="Your company" /></label>
+            <label className="text-[11px] text-[#2A211D]/70">Phone No. <span className="text-[#6EA9C7]">*</span><input className={inputClassName} required type="tel" value={formData.phone} onChange={(event) => updateField("phone", event.target.value)} placeholder="+91 00000 00000" /></label>
+            <label className="text-[11px] text-[#2A211D]/70">Email Address <span className="text-[#6EA9C7]">*</span><input className={inputClassName} required type="email" value={formData.email} onChange={(event) => updateField("email", event.target.value)} placeholder="you@company.com" /></label>
+          </div>
+          <label className="mt-5 block text-[11px] text-[#2A211D]/70">What are you looking for? <span className="text-[#6EA9C7]">*</span><select className={inputClassName} required value={formData.business_type} onChange={(event) => updateField("business_type", event.target.value)}><option value="" disabled>Select an option</option><option>Website design & development</option><option>Branding & identity</option><option>AI automation or CRM</option><option>Digital strategy</option><option>Something else</option></select></label>
+          <label className="mt-5 block text-[11px] text-[#2A211D]/70">Tell us more about your project <span className="text-[#6EA9C7]">*</span><textarea className={`${inputClassName} min-h-[126px] resize-y`} required value={formData.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Share your ideas, goals, or just say hello..." /></label>
+          <button disabled={loading} type="submit" className="group mt-5 flex w-full items-center justify-center gap-3 rounded-full bg-[#B7DDF0] px-6 py-4 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-[#2A211D] transition duration-300 hover:-translate-y-0.5 hover:bg-[#9FD0E8] disabled:cursor-not-allowed disabled:opacity-60">{loading ? "Sending..." : "Send message"}<ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.4} /></button>
+        </motion.form>
 
-          <p className="mt-2 mb-8 text-sm font-medium text-slate-600">
-            We usually reply within 24 hours. Add your WhatsApp in the message if
-            you prefer a WhatsApp response.
-          </p>
-
-          <form id="contact-form" className="space-y-7" onSubmit={handleSubmit}>
-            <div className="grid gap-7 md:grid-cols-2">
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={formData.full_name}
-                onChange={(e) =>
-                  setFormData({ ...formData, full_name: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-                required
-              />
-
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-                required
-              />
-            </div>
-
-            <div className="grid gap-7 md:grid-cols-2">
-              <input
-                type="text"
-                placeholder="Business Name"
-                value={formData.business_name}
-                onChange={(e) =>
-                  setFormData({ ...formData, business_name: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-              />
-
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-              />
-            </div>
-
-            <div className="grid gap-7 md:grid-cols-2">
-              <input
-                type="text"
-                placeholder="Website (Optional)"
-                value={formData.website}
-                onChange={(e) =>
-                  setFormData({ ...formData, website: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-              />
-              <select
-                value={formData.business_type}
-                onChange={(e) =>
-                  setFormData({ ...formData, business_type: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-              >
-                <option value="" disabled>
-                  Business Type
-                </option>
-
-                <option>Personal Brand</option>
-                <option>Startup</option>
-                <option>Agency</option>
-                <option>E-commerce</option>
-                <option>Restaurant</option>
-                <option>Healthcare</option>
-                <option>Education</option>
-                <option>Real Estate</option>
-                <option>Beauty</option>
-                <option>Other</option>
-              </select>
-
-              {/*<select
-                value={formData.selected_plan}
-                onChange={(e) =>
-                  setFormData({ ...formData, selected_plan: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-              >
-              <option value="" disabled>
-                Select Package
-              </option>
-
-              <option>Standard - ₹7,999</option>
-
-              <option>Pro - ₹14,999</option>
-
-              <option>Ultra - ₹24,999</option>
-
-              <option>Custom</option>
-              </select> */}
-
-              <select
-                value={formData.country}
-                onChange={(e) =>
-                  setFormData({ ...formData, country: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-                required
-              >
-                <option value="" disabled>
-                  Country
-                </option>
-
-                {countries.map((c) => (
-                  <option key={c.code} value={c.name}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                value={formData.budget}
-                onChange={(e) =>
-                  setFormData({ ...formData, budget: e.target.value })
-                }
-                className="rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all duration-300 focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-              >
-                <option value="" disabled>
-                  Estimated Budget
-                </option>
-
-                {BUDGET_OPTIONS[currency].map((option) => (
-                  <option key={option}>{option}</option>
-                ))}
-              </select>
-            </div>
-
-            <textarea
-              rows={6}
-              placeholder="Tell us about your business and project..."
-              value={formData.message}
-              onChange={(e) =>
-                setFormData({ ...formData, message: e.target.value })
-              }
-              className="w-full rounded-2xl border border-slate-200 bg-white/60 p-4 outline-none transition-all focus:border-[#7C5CFF] focus:ring-4 focus:ring-[#7C5CFF]/10"
-            />
-
-            <Button
-              type="submit"
-              //variant="primary"
-              className="w-full rounded-2xl bg-gradient-to-r from-[#6D5EF9] to-[#8B7BFF] px-8 py-4 text-base font-semibold text-white shadow-[0_15px_35px_rgba(109,94,249,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(109,94,249,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
-              disabled={loading}
-            >
-              {loading ? "Submitting..." : "Request Proposal"}
-            </Button>
-          </form>
-        </GlassPanel>
-      </motion.div>
-    </Section>
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, delay: 0.24, ease: [0.22, 1, 0.36, 1] }} className="relative mx-auto hidden h-[470px] w-full max-w-[260px] xl:block" aria-hidden="true">
+          <div className="absolute right-[-48px] top-8 h-[355px] w-[310px] rounded-full bg-[#DCEBF0]" /><div className="absolute -right-12 top-1 h-[315px] w-[300px] rotate-[-13deg] rounded-[50%] border border-[#8EBED5]/70" /><span className="absolute right-0 top-2 text-[28px] text-[#6EA9C7]">✦</span>
+          <div className="absolute bottom-6 right-[-24px] h-[318px] w-[285px] overflow-hidden rounded-[48%] bg-[linear-gradient(135deg,#f8f4ed_0%,#eef2f1_48%,#d4e5e9_100%)] shadow-[0_18px_40px_rgba(42,33,29,0.11)]"><div className="absolute inset-x-0 bottom-0 h-[102px] bg-[#e7ddd0]" /><div className="absolute left-7 top-3 h-[210px] w-[2px] rotate-[-18deg] bg-[#637d53]" /><div className="absolute left-1 top-15 h-11 w-7 rotate-[25deg] rounded-[100%_0_100%_0] bg-[#6b855a]" /><div className="absolute left-9 top-[82px] h-12 w-7 rotate-[-28deg] rounded-[100%_0_100%_0] bg-[#799268]" /><div className="absolute left-0 top-[133px] h-11 w-7 rotate-[26deg] rounded-[100%_0_100%_0] bg-[#58734c]" /><div className="absolute left-13 top-[158px] h-10 w-6 rotate-[-30deg] rounded-[100%_0_100%_0] bg-[#6e8a5d]" /><div className="absolute bottom-8 left-[-20px] h-[148px] w-[250px] -rotate-[8deg] rounded-[13px] bg-[linear-gradient(135deg,#dedbd5_0%,#aaa49f_58%,#6f6a67_100%)] shadow-[0_19px_23px_rgba(42,33,29,0.22)]"><div className="absolute inset-x-5 top-3 h-[112px] rounded-[6px] bg-[linear-gradient(135deg,#faf7f1,#ddd9d3)]" /><span className="absolute left-[113px] top-[48px] text-[18px] text-[#696461]/70">●</span><div className="absolute bottom-3 left-[66px] h-2 w-24 rounded-full bg-[#5d5957]" /></div><div className="absolute bottom-[35px] right-3 h-[61px] w-[51px] rounded-b-[13px] rounded-t-[7px] bg-[#f8f4ea] shadow-[0_8px_15px_rgba(42,33,29,0.13)]"><div className="absolute -right-4 top-3 h-7 w-6 rounded-r-full border-[3px] border-[#f8f4ea]" /><p className="pt-6 text-center font-mono text-[5px] tracking-[0.13em] text-[#806C5D]">LUMORA</p></div></div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
