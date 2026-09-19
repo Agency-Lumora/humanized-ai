@@ -545,7 +545,7 @@ export function ProcessSection() {
                 return (
                   <motion.article
                     key={item.number}
-                    className="relative flex min-h-[34vh] items-end sm:min-h-[30vh] lg:min-h-[70vh] lg:items-center"
+                    className="relative flex min-h-[34vh] items-center sm:min-h-[30vh] lg:min-h-[70vh] lg:items-center"
                     initial={
                       reducedMotion
                         ? false

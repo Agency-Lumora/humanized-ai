@@ -45,17 +45,17 @@ function ServiceCell({
   return (
     <motion.a
       href="#consultation"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{
-        duration: 0.95,
-        delay: (index % 3) * 0.12,
+        duration: 1.1,
+        delay: (index % 3) * 0.15,
         ease: [0.22, 1, 0.36, 1],
       }}
       data-motion-reveal
-      whileHover={{ y: -4, scale: 1.008 }}
-      whileTap={{ scale: 0.995 }}
+      whileHover={{ y: -6, scale: 1.02, boxShadow: "0 20px 40px rgba(42,33,29,0.1)" }}
+      whileTap={{ scale: 0.98 }}
       className="
         group
         relative
@@ -173,11 +173,11 @@ export function ServicesSection() {
       >
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{
-            duration: 1,
+            duration: 1.2,
             ease: [0.22, 1, 0.36, 1],
           }}
           data-motion-reveal

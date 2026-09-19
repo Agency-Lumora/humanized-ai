@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 const columns = {
   "Quick links": [["Home", "#top"], ["About", "#about"], ["Services", "#services"], ["Work", "#portfolio"], ["Journal", "#"], ["Contact", "#consultation"]],
   Services: [["Website Design & Development", "#services"], ["UI/UX Design", "#services"], ["Website Redesign", "#services"], ["Integrations & Setup", "#services"], ["Automations", "#services"], ["Social Media Marketing", "#services"], ["Paid Ads", "#services"]],
-  "Partner with us": [["Marketing Agencies", "#services"], ["Service Agencies", "#services"], ["Collaborate", "#consultation"]],
+  "Partner with us": [["Marketing Agencies", "/partnership"], ["Service Agencies", "/partnership"], ["Collaborate", "/partnership"]],
 };
 
 export function Footer() {

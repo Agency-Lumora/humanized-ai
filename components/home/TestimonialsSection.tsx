@@ -22,7 +22,7 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(3rem,5vw,4.5rem)]">
       <Container>
-        <div className="flex items-end justify-between gap-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }} className="flex items-end justify-between gap-6">
           <div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806C5D]">Kind words</p>
             <h2 className="mt-3 font-serif text-[clamp(1.75rem,2.75vw,2.25rem)] leading-[1.2] tracking-[-0.02em]">
@@ -45,16 +45,16 @@ export function TestimonialsSection() {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-        </div>
+        </motion.div>
 
         <div className="mt-[clamp(1.5rem,2.5vw,2rem)] overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, x: 40, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -40, scale: 0.95 }}
+              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-start gap-6 border border-[#806C5D]/20 bg-[#F8F4EE] p-[clamp(1.5rem,3vw,2.5rem)] lg:flex-row lg:items-center lg:justify-between"
             >
               <div className="flex max-w-3xl items-start gap-4">

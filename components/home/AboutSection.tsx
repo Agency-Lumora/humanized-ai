@@ -21,20 +21,20 @@ export function AboutSection() {
               asset once one is available (no suitable existing image asset
               was found in the project). */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             data-motion-reveal
             className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#DCE7EA] to-[#AFC4CE]"
           />
 
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40, x: -20 }}
+            whileInView={{ opacity: 1, y: 0, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1.05, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             data-motion-reveal
           >
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6B584B]">
@@ -60,15 +60,21 @@ export function AboutSection() {
             <div className="mt-8 h-px w-full max-w-[520px] bg-[#806C5D]/20" />
 
             <div className="mt-6 flex max-w-[520px] items-start justify-between gap-6">
-              {stats.map((stat) => (
-                <div key={stat.label}>
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.4 + (index * 0.1), ease: [0.22, 1, 0.36, 1] }}
+                >
                   <p className="font-serif text-2xl text-[#35251B] sm:text-3xl">
                     {stat.value}
                   </p>
                   <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#6B584B]">
                     {stat.label}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>

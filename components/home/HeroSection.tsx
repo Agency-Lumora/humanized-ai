@@ -26,16 +26,16 @@ const projects: Project[] = [
     tone: "#F7F3EC",
   },
   {
-    client: "ZAMURA",
-    eyebrow: "ZAMURA",
+    client: "NARRATIV.",
+    eyebrow: "NARRATIV.",
     image: "/narrativ.jpeg",
     headline: "Better Ideas.\nBigger Results.",
     subline: "Beauty & lifestyle",
     tone: "#DDECF2",
   },
   {
-    client: "REET'S CLUB",
-    eyebrow: "REET'S CLUB",
+    client: "LET'S TALK NAILS",
+    eyebrow: "NAILS BY NI",
     image: "/nails.jpeg",
     headline: "The art of\neveryday elegance.",
     subline: "Contemporary fashion",
@@ -65,14 +65,14 @@ function getWheelOffset(index: number, active: number, total: number) {
 
 function getCardTransform(offset: number) {
   if (offset === 0) {
-    return { x: -18, y: 0, z: 80, rotate: 7, scale: 1, zIndex: 30 };
+    return { x: 0, y: 0, z: 80, rotate: 0, scale: 1, zIndex: 30 };
   }
 
   if (offset > 0) {
-    return { x: 102, y: -108, z: 28, rotate: 10, scale: 0.93, zIndex: 10 };
+    return { x: 0, y: -280, z: 28, rotate: 0, scale: 0.9, zIndex: 10 };
   }
 
-  return { x: 88, y: 122, z: 12, rotate: 10, scale: 0.9, zIndex: 20 };
+  return { x: 0, y: 280, z: 12, rotate: 0, scale: 0.9, zIndex: 20 };
 }
 
 function ProjectCard({
@@ -133,66 +133,43 @@ function ProjectCard({
 
 function ProjectShowcase() {
   const [active, setActive] = useState(0);
-  const wheelLocked = useRef(false);
-  const activeRef = useRef(active);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    activeRef.current = active;
-  }, [active]);
+    const handleScroll = () => {
+      const heroSection = document.getElementById('top');
+      if (!heroSection) return;
 
-  const next = () => {
-    setActive((current) => (current + 1) % projects.length);
-  };
+      const heroRect = heroSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-  const previous = () => {
-    setActive((current) => (current - 1 + projects.length) % projects.length);
-  };
+      // Calculate progress based on how much the hero section has scrolled
+      const scrollProgress = Math.max(0, Math.min(1, -heroRect.top / (heroRect.height - windowHeight)));
+
+      // Direct mapping: 0-0.33 -> card 0, 0.33-0.66 -> card 1, 0.66-1.0 -> card 2
+      const newActive = Math.min(Math.floor(scrollProgress * projects.length), projects.length - 1);
+      setActive(Math.max(0, newActive));
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleDragEnd = (
     _event: unknown,
     info: { offset: { x: number } }
   ) => {
-    if (info.offset.x < -60) next();
-    else if (info.offset.x > 60) previous();
-  };
-
-  // Scroll one card per wheel step while the showcase is active. Once the
-  // final card is reached, normal page scrolling resumes so the user can move
-  // on to the next section.
-  const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
-    if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
-    if (Math.abs(event.deltaY) < 8) return;
-
-    const atStart = activeRef.current <= 0;
-    const atEnd = activeRef.current >= projects.length - 1;
-
-    if (event.deltaY > 0 && !atEnd) {
-      event.preventDefault();
-      if (wheelLocked.current) return;
-      wheelLocked.current = true;
-      next();
-      window.setTimeout(() => {
-        wheelLocked.current = false;
-      }, 650);
-      return;
-    }
-
-    if (event.deltaY < 0 && !atStart) {
-      event.preventDefault();
-      if (wheelLocked.current) return;
-      wheelLocked.current = true;
-      previous();
-      window.setTimeout(() => {
-        wheelLocked.current = false;
-      }, 650);
+    if (info.offset.x < -60) {
+      setActive((current) => (current + 1) % projects.length);
+    } else if (info.offset.x > 60) {
+      setActive((current) => (current - 1 + projects.length) % projects.length);
     }
   };
 
   return (
     <div
+      ref={containerRef}
       className="relative h-[480px] w-full touch-pan-y md:h-[540px]"
-      data-lenis-prevent
-      onWheel={handleWheel}
       aria-label="Selected work carousel. Scroll to view each project."
     >
       <div className="absolute right-[10%] top-[8%] z-0 h-64 w-64 rounded-full bg-[#DCEBF0] md:h-80 md:w-80" />
@@ -291,7 +268,7 @@ export function Header() {
   const isHome = pathname === "/";
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F4EFE7]/95 px-6 py-6 backdrop-blur-sm md:px-12 md:py-7">
+    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F4EFE7]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-6 md:px-12 md:py-7">
       <Link
         href={isHome ? "#top" : "/"}
         className="font-serif text-[25px] tracking-[0.01em] text-[#2A211D] md:text-[27px]"
@@ -366,11 +343,12 @@ export function HeroSection() {
       id="top"
       className="relative mx-auto max-w-[1440px] overflow-x-clip bg-[#F4EFE7]"
       aria-labelledby="hero-title"
+      style={{ height: '400vh' }}
     >
       <Header />
 
-      <div className="relative min-h-screen px-6 md:px-12">
-      <div className="grid min-h-screen items-center gap-8 pb-8 pt-[118px] md:grid-cols-[0.9fr_1.1fr] md:gap-2 md:pb-[94px] md:pt-[126px]">
+      <div className="sticky top-0 h-screen px-6 md:px-12">
+      <div className="grid h-full items-center gap-8 pb-8 pt-[44px] md:grid-cols-[0.9fr_1.1fr] md:gap-2 md:pb-[94px] md:pt-[52px]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -420,7 +398,7 @@ export function HeroSection() {
           </div>
         </div>
 
-       
+
       </div>
       </div>
     </section>
