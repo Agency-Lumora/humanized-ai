@@ -131,29 +131,38 @@ function ProjectCard({
   );
 }
 
+const AUTO_ADVANCE_INTERVAL = 3000;
+const AUTO_ADVANCE_RESUME_DELAY = 4000;
+
 function ProjectShowcase() {
   const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const resumeTimeoutRef = useRef<number | undefined>(undefined);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-advance the showcase on its own, pausing briefly whenever the
+  // user manually interacts (drag/swipe) so it doesn't fight them.
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % projects.length);
+    }, AUTO_ADVANCE_INTERVAL);
+
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.getElementById('top');
-      if (!heroSection) return;
-
-      const heroRect = heroSection.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Calculate progress based on how much the hero section has scrolled
-      const scrollProgress = Math.max(0, Math.min(1, -heroRect.top / (heroRect.height - windowHeight)));
-
-      // Direct mapping: 0-0.33 -> card 0, 0.33-0.66 -> card 1, 0.66-1.0 -> card 2
-      const newActive = Math.min(Math.floor(scrollProgress * projects.length), projects.length - 1);
-      setActive(Math.max(0, newActive));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.clearTimeout(resumeTimeoutRef.current);
   }, []);
+
+  const pauseAutoAdvance = () => {
+    setIsPaused(true);
+    window.clearTimeout(resumeTimeoutRef.current);
+    resumeTimeoutRef.current = window.setTimeout(() => {
+      setIsPaused(false);
+    }, AUTO_ADVANCE_RESUME_DELAY);
+  };
 
   const handleDragEnd = (
     _event: unknown,
@@ -161,8 +170,10 @@ function ProjectShowcase() {
   ) => {
     if (info.offset.x < -60) {
       setActive((current) => (current + 1) % projects.length);
+      pauseAutoAdvance();
     } else if (info.offset.x > 60) {
       setActive((current) => (current - 1 + projects.length) % projects.length);
+      pauseAutoAdvance();
     }
   };
 
@@ -170,7 +181,7 @@ function ProjectShowcase() {
     <div
       ref={containerRef}
       className="relative h-[480px] w-full touch-pan-y md:h-[540px]"
-      aria-label="Selected work carousel. Scroll to view each project."
+      aria-label="Selected work carousel. Automatically cycles through each project; drag to change manually."
     >
       <div className="absolute right-[10%] top-[8%] z-0 h-64 w-64 rounded-full bg-[#DCEBF0] md:h-80 md:w-80" />
       <div className="absolute right-[2%] top-[24%] z-0 h-[280px] w-[520px] rotate-[-16deg] rounded-[50%] border border-[#8EBED5]/60" />
@@ -206,10 +217,6 @@ function ProjectShowcase() {
         <p className="mt-1 font-serif text-[24px] leading-none text-[#2A211D] md:text-[30px]">200%</p>
         <p className="mt-1 text-[8px] leading-tight text-[#2A211D]/55">average growth for our clients</p>
       </div>
-
-      <p className="absolute bottom-1 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap font-mono text-[7px] uppercase tracking-[0.16em] text-[#2A211D]/45 md:text-[8px]">
-        Scroll to explore · {String(active + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-      </p>
     </div>
   );
 }
@@ -343,11 +350,10 @@ export function HeroSection() {
       id="top"
       className="relative mx-auto max-w-[1440px] overflow-x-clip bg-[#F4EFE7]"
       aria-labelledby="hero-title"
-      style={{ height: '400vh' }}
     >
       <Header />
 
-      <div className="sticky top-0 h-screen px-6 md:px-12">
+      <div className="h-screen px-6 md:px-12">
       <div className="grid h-full items-center gap-8 pb-8 pt-[44px] md:grid-cols-[0.9fr_1.1fr] md:gap-2 md:pb-[94px] md:pt-[52px]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
