@@ -83,12 +83,12 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Subtle editorial glow that lags farthest behind. Blends chocolate, 
+      {/* Subtle editorial glow that lags farthest behind. Blends chocolate,
           taupe, and powder blue for a refined Lumora aura. */}
       <div
         ref={glowRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9998] h-56 w-56 rounded-full blur-3xl transition-opacity duration-300 will-change-transform"
+        className="pointer-events-none fixed left-0 top-0 z-[9998] h-56 w-56 blur-3xl transition-opacity duration-300 will-change-transform"
         style={{
           opacity: opacity * (hovering ? 0.5 : 0.35),
           background:
@@ -97,22 +97,23 @@ export function CustomCursor() {
         }}
       />
 
-      {/* Outline ring that eases behind the dot */}
+      {/* Outline ring that eases behind the dot - diamond shape */}
       <div
         ref={ringRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full border will-change-transform"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] border will-change-transform"
         style={{
           opacity,
           height: hovering ? 56 : 34,
           width: hovering ? 56 : 34,
           borderColor: hovering
-            ? "rgba(175,196,206,0.8)"
-            : "rgba(128,108,93,0.5)",
+            ? "rgba(59,130,246,0.9)"
+            : "rgba(59,130,246,0.7)",
           borderWidth: 1.5,
           background: hovering
-            ? "rgba(220,231,234,0.12)"
+            ? "rgba(59,130,246,0.15)"
             : "transparent",
+          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
           transition:
             "height 0.25s ease, width 0.25s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease",
         }}

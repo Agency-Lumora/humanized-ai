@@ -155,6 +155,18 @@ function ProjectShowcase() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-scroll on mobile
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (!isMobile) return;
+
+    const interval = setInterval(() => {
+      setActive((current) => (current + 1) % projects.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const handleDragEnd = (
     _event: unknown,
     info: { offset: { x: number } }
@@ -169,12 +181,12 @@ function ProjectShowcase() {
   return (
     <div
       ref={containerRef}
-      className="relative h-[480px] w-full touch-pan-y md:h-[540px]"
+      className="relative h-[280px] w-full touch-pan-y md:h-[540px]"
       aria-label="Selected work carousel. Scroll to view each project."
     >
-      <div className="absolute right-[10%] top-[8%] z-0 h-64 w-64 rounded-full bg-[#DCEBF0] md:h-80 md:w-80" />
-      <div className="absolute right-[2%] top-[24%] z-0 h-[280px] w-[520px] rotate-[-16deg] rounded-[50%] border border-[#8EBED5]/60" />
-      <span className="absolute right-[22%] top-[16%] z-20 text-[24px] font-light text-[#6EA9C7]">✦</span>
+      <div className="absolute right-[10%] top-[8%] z-0 h-32 w-32 rounded-full bg-[#DCEBF0] md:h-80 md:w-80" />
+      <div className="absolute right-[2%] top-[24%] z-0 h-[140px] w-[260px] rotate-[-16deg] rounded-[50%] border border-[#8EBED5]/60 md:h-[280px] md:w-[520px]" />
+      <span className="absolute right-[22%] top-[16%] z-20 text-[16px] font-light text-[#6EA9C7] md:text-[24px]">✦</span>
 
       <motion.div
         className="absolute inset-0 z-10 flex cursor-grab items-center justify-center active:cursor-grabbing"
@@ -185,7 +197,7 @@ function ProjectShowcase() {
         onDragEnd={handleDragEnd}
       >
         <div
-          className="relative h-full w-[780px]"
+          className="relative h-full w-[400px] md:w-[780px]"
           style={{ transformStyle: "preserve-3d" }}
         >
           {projects.map((project, index) => (
@@ -201,13 +213,13 @@ function ProjectShowcase() {
         </div>
       </motion.div>
 
-      <div className="absolute right-[3%] top-[52%] z-40 w-[118px] rounded-[4px] border border-white/80 bg-white/80 p-3 shadow-[0_14px_30px_rgba(42,33,29,0.12)] backdrop-blur-sm md:right-[2%] md:w-[145px] md:p-4">
-        <p className="font-mono text-[7px] uppercase tracking-[0.11em] text-[#2A211D]/50">Real Results</p>
-        <p className="mt-1 font-serif text-[24px] leading-none text-[#2A211D] md:text-[30px]">200%</p>
-        <p className="mt-1 text-[8px] leading-tight text-[#2A211D]/55">average growth for our clients</p>
+      <div className="absolute right-[3%] top-[52%] z-40 w-[80px] rounded-[4px] border border-white/80 bg-white/80 p-2 shadow-[0_14px_30px_rgba(42,33,29,0.12)] backdrop-blur-sm md:right-[2%] md:w-[145px] md:p-4">
+        <p className="font-mono text-[5px] uppercase tracking-[0.11em] text-[#2A211D]/50 md:text-[7px]">Real Results</p>
+        <p className="mt-1 font-serif text-[16px] leading-none text-[#2A211D] md:text-[30px]">200%</p>
+        <p className="mt-1 text-[6px] leading-tight text-[#2A211D]/55 md:text-[8px]">average growth for our clients</p>
       </div>
 
-      <p className="absolute bottom-1 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap font-mono text-[7px] uppercase tracking-[0.16em] text-[#2A211D]/45 md:text-[8px]">
+      <p className="absolute bottom-1 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap font-mono text-[6px] uppercase tracking-[0.16em] text-[#2A211D]/45 md:text-[8px]">
         Scroll to explore · {String(active + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
       </p>
     </div>
@@ -268,7 +280,7 @@ export function Header() {
   const isHome = pathname === "/";
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F4EFE7]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-6 md:px-12 md:py-7">
+    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F4EFE7]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-3 md:px-12 md:py-4">
       <Link
         href={isHome ? "#top" : "/"}
         className="font-serif text-[25px] tracking-[0.01em] text-[#2A211D] md:text-[27px]"
@@ -314,7 +326,7 @@ export function Header() {
 
       {menuOpen && (
         <nav
-          className="fixed left-0 right-0 top-[74px] flex flex-col border-b border-[#2A211D]/10 bg-[#F4EFE7]/95 p-5 shadow-lg backdrop-blur-md md:hidden"
+          className="fixed left-0 right-0 top-[44px] flex flex-col border-b border-[#2A211D]/10 bg-[#F4EFE7]/95 p-5 shadow-lg backdrop-blur-md md:hidden"
           aria-label="Mobile navigation"
         >
           {navLinks.map(([label, href]) => (
@@ -348,7 +360,7 @@ export function HeroSection() {
       <Header />
 
       <div className="sticky top-0 h-screen px-6 md:px-12">
-      <div className="grid h-full items-center gap-8 pb-8 pt-[44px] md:grid-cols-[0.9fr_1.1fr] md:gap-2 md:pb-[94px] md:pt-[52px]">
+      <div className="grid h-full items-center gap-8 pb-8 pt-[100px] md:grid-cols-[0.9fr_1.1fr] md:gap-2 md:pb-[94px] md:pt-[80px]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}

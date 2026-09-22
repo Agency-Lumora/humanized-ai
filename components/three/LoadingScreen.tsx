@@ -13,7 +13,7 @@ interface LoadingScreenProps {
   duration?: number;
 }
 
-const particleCount = 2800;
+const particleCount = 1800;
 
 // Component to signal when canvas is ready
 function CanvasReadySignal({ onReady }: { onReady: () => void }) {
@@ -43,8 +43,9 @@ function ParticleCanvas({ progress, onCanvasReady }: { progress: number; onCanva
         powerPreference: "high-performance",
         outputColorSpace: THREE.SRGBColorSpace,
       }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       performance={{ min: 0.5, max: 1 }}
+      frameloop="demand"
     >
       <CanvasReadySignal onReady={onCanvasReady} />
       <PerspectiveCamera position={[0, 0, 8]} makeDefault fov={50} />

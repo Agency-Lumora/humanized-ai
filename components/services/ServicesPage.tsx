@@ -126,7 +126,7 @@ function ServicesHeader() {
   ];
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F8F9FA]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-6 md:px-12 md:py-7">
+    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F8F9FA]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-3 md:px-12 md:py-4">
       <Link
         href="/"
         className="font-sans text-[25px] font-bold tracking-[0.05em] text-[#111827] md:text-[27px]"
@@ -176,7 +176,7 @@ function ServicesHeader() {
 
       {menuOpen && (
         <nav
-          className="fixed left-0 right-0 top-[74px] flex flex-col border-b border-[#111827]/10 bg-[#F8F9FA]/95 p-5 shadow-lg backdrop-blur-md md:hidden"
+          className="fixed left-0 right-0 top-[44px] flex flex-col border-b border-[#111827]/10 bg-[#F8F9FA]/95 p-5 shadow-lg backdrop-blur-md md:hidden"
           aria-label="Mobile navigation"
         >
           {navLinks.map((link) => (
@@ -199,7 +199,7 @@ function ServicesHeader() {
 function HeroSection() {
   return (
     <section className="relative mx-auto max-w-[1440px] overflow-hidden bg-[#F8F9FA] px-6 md:px-12">
-      <div className="grid min-h-screen items-center gap-8 pt-[44px] md:grid-cols-[1fr_1fr] md:gap-12 md:pt-[60px]">
+      <div className="grid min-h-screen items-center gap-8 pt-[44px] md:grid-cols-[1fr_1fr] md:gap-12 md:pt-[80px]">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -591,7 +591,7 @@ export default function ServicesPageComponent() {
   return (
     <div className="min-h-screen bg-[#F8F9FA]">
       <ServicesHeader />
-      <main className="pt-[20px]">
+      <main className="pt-[50px]">
         <HeroSection />
         <ServicesShowcase />
         <ProcessSection />

@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function PartnershipPage() {
   return (
-    <div className="min-h-screen bg-[#E8F4F8] pt-[20px] text-[#2A211D]">
+    <div className="min-h-screen bg-[#E8F4F8] pt-[50px] text-[#2A211D]">
       <Header />
       <main>
         {/* Partnership CTA Section */}

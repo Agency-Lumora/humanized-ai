@@ -13,7 +13,7 @@ export function CrystalParticles({ isAssembling, progress }: CrystalParticlesPro
   const pointsRef = useRef<THREE.Points>(null);
   // Reduce particle count on mobile for better performance
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particleCount = isMobile ? 1400 : 2800;
+  const particleCount = isMobile ? 900 : 1800;
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
@@ -23,7 +23,7 @@ export function CrystalParticles({ isAssembling, progress }: CrystalParticlesPro
     const targetPositions = new Float32Array(particleCount * 3);
 
     // Generate crystal-like icosahedron positions
-    const icosahedronGeo = new THREE.IcosahedronGeometry(1.5, 4);
+    const icosahedronGeo = new THREE.IcosahedronGeometry(1.5, 3);
     const icosaPositions = icosahedronGeo.attributes.position.array;
 
     for (let i = 0; i < particleCount; i++) {

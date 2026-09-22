@@ -5,5 +5,5 @@ import { ProcessSection } from "@/components/home/ProcessSection";
 export const metadata = { title: "Process | Lumora Agency", description: "See Lumora's thoughtful process from discovery through launch and growth." };
 
 export default function ProcessPage() {
-  return <div className="min-h-screen bg-[#F4EFE7] pt-[20px] text-[#2A211D]"><Header /><main><ProcessSection /></main><Footer /></div>;
+  return <div className="min-h-screen bg-[#F4EFE7] pt-[50px] text-[#2A211D]"><Header /><main><ProcessSection /></main><Footer /></div>;
 }
