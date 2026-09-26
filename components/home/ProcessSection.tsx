@@ -68,10 +68,12 @@ export default ProcessSection;*/
 
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
+  useMotionValueEvent,
   useReducedMotion,
+  useScroll,
 } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 
@@ -488,6 +490,23 @@ export function ProcessSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = shouldReduceMotion ?? false;
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  // Drive the active step continuously off real scroll position (rather than
+  // a one-shot "enters viewport" trigger) so the sticky graphic updates in
+  // lockstep with scrolling in both directions, with no delayed "stuck" jump.
+  const { scrollYProgress } = useScroll({
+    target: stepsRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    const index = Math.min(
+      process.length - 1,
+      Math.max(0, Math.round(progress * (process.length - 1)))
+    );
+    setActiveIndex((current) => (current === index ? current : index));
+  });
 
   return (
     <section
@@ -495,8 +514,10 @@ export function ProcessSection() {
       className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(4.5rem,9vw,8rem)]"
     >
       <Container>
-        {/* Section heading */}
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+        {/* Section heading — aligned to the same columns as the graphic/steps
+            layout below, so the label sits over the graphic and the heading
+            sits over the steps instead of floating on its own grid. */}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6B584B]">
               <span className="text-[#88C5E8]">03</span>
@@ -537,7 +558,7 @@ export function ProcessSection() {
           </div>
 
           {/* Scroll-responsive process steps */}
-          <div className="relative">
+          <div ref={stepsRef} className="relative">
             <div className="space-y-4 lg:space-y-0">
               {process.map((item, index) => {
                 const isActive = activeIndex === index;
@@ -545,7 +566,7 @@ export function ProcessSection() {
                 return (
                   <motion.article
                     key={item.number}
-                    className="relative flex min-h-[34vh] items-center sm:min-h-[30vh] lg:min-h-[70vh] lg:items-center"
+                    className="relative flex min-h-[34vh] items-center sm:min-h-[30vh] lg:min-h-[52vh] lg:items-center"
                     initial={
                       reducedMotion
                         ? false
@@ -565,7 +586,6 @@ export function ProcessSection() {
                       delay: reducedMotion ? 0 : index * 0.04,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    onViewportEnter={() => setActiveIndex(index)}
                   >
                     <motion.button
                       type="button"

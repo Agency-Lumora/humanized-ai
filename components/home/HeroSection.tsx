@@ -131,28 +131,29 @@ function ProjectCard({
   );
 }
 
+const AUTO_ADVANCE_INTERVAL = 3000;
+const AUTO_ADVANCE_RESUME_DELAY = 4000;
+
 function ProjectShowcase() {
   const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const resumeTimeoutRef = useRef<number | undefined>(undefined);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-advance the showcase on its own, pausing briefly whenever the
+  // user manually interacts (drag/swipe) so it doesn't fight them.
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % projects.length);
+    }, AUTO_ADVANCE_INTERVAL);
+
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.getElementById('top');
-      if (!heroSection) return;
-
-      const heroRect = heroSection.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Calculate progress based on how much the hero section has scrolled
-      const scrollProgress = Math.max(0, Math.min(1, -heroRect.top / (heroRect.height - windowHeight)));
-
-      // Direct mapping: 0-0.33 -> card 0, 0.33-0.66 -> card 1, 0.66-1.0 -> card 2
-      const newActive = Math.min(Math.floor(scrollProgress * projects.length), projects.length - 1);
-      setActive(Math.max(0, newActive));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.clearTimeout(resumeTimeoutRef.current);
   }, []);
 
   // Auto-scroll on mobile
@@ -173,8 +174,10 @@ function ProjectShowcase() {
   ) => {
     if (info.offset.x < -60) {
       setActive((current) => (current + 1) % projects.length);
+      pauseAutoAdvance();
     } else if (info.offset.x > 60) {
       setActive((current) => (current - 1 + projects.length) % projects.length);
+      pauseAutoAdvance();
     }
   };
 
@@ -355,7 +358,6 @@ export function HeroSection() {
       id="top"
       className="relative mx-auto max-w-[1440px] overflow-x-clip bg-[#F4EFE7]"
       aria-labelledby="hero-title"
-      style={{ height: '400vh' }}
     >
       <Header />
 
