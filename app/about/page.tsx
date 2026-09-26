@@ -38,7 +38,7 @@ export default function AboutPage() {
       <Header />
       <main className="overflow-x-clip">
         {/* ============ HERO ============ */}
-        <section className="relative mx-auto max-w-[1440px] px-6 pb-[clamp(3rem,7vw,5rem)] pt-[clamp(7rem,12vw,9.5rem)] md:px-12">
+        <section className="relative mx-auto max-w-[1440px] px-6 pb-[clamp(3rem,7vw,5rem)] pt-[clamp(4rem,8vw,5.5rem)] md:px-12">
           <div className="grid gap-14 md:grid-cols-[1fr_0.85fr] md:items-center md:gap-10">
             <motion.div {...reveal} className="max-w-[560px]">
               <p className="mb-6 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#6EA9C7]">

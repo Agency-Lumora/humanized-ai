@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -17,7 +17,7 @@ import {
   X
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 // Service data with detailed content
 const servicesData = [
@@ -126,10 +126,10 @@ function ServicesHeader() {
   ];
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F8F9FA]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-3 md:px-12 md:py-4">
+    <header className="fixed left-0 right-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between bg-[#F4EFE7]/80 backdrop-blur-xl border border-white/20 shadow-lg px-6 py-3 md:px-12 md:py-4">
       <Link
         href="/"
-        className="font-sans text-[25px] font-bold tracking-[0.05em] text-[#111827] md:text-[27px]"
+        className="font-sans text-[25px] font-bold tracking-[0.05em] text-[#2A211D] md:text-[27px]"
       >
         LUMORA
       </Link>
@@ -146,7 +146,7 @@ function ServicesHeader() {
             className={`font-sans text-[11px] uppercase tracking-[0.1em] transition-opacity hover:opacity-60 ${
               pathname === link.href 
                 ? "text-[#3B82F6] font-semibold" 
-                : "text-[#111827]/80"
+                : "text-[#2A211D]/80"
             }`}
           >
             {link.label}
@@ -176,7 +176,7 @@ function ServicesHeader() {
 
       {menuOpen && (
         <nav
-          className="fixed left-0 right-0 top-[44px] flex flex-col border-b border-[#111827]/10 bg-[#F8F9FA]/95 p-5 shadow-lg backdrop-blur-md md:hidden"
+          className="fixed left-0 right-0 top-[44px] flex flex-col border-b border-[#2A211D]/10 bg-[#F4EFE7]/95 p-5 shadow-lg backdrop-blur-md md:hidden"
           aria-label="Mobile navigation"
         >
           {navLinks.map((link) => (
@@ -184,7 +184,7 @@ function ServicesHeader() {
               key={link.label}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="border-b border-[#111827]/10 py-3 font-sans text-[12px] uppercase tracking-[0.13em] last:border-0"
+              className="border-b border-[#2A211D]/10 py-3 font-sans text-[12px] uppercase tracking-[0.13em] last:border-0"
             >
               {link.label}
             </Link>
@@ -198,8 +198,8 @@ function ServicesHeader() {
 // Hero Section
 function HeroSection() {
   return (
-    <section className="relative mx-auto max-w-[1440px] overflow-hidden bg-[#F8F9FA] px-6 md:px-12">
-      <div className="grid min-h-screen items-center gap-8 pt-[44px] md:grid-cols-[1fr_1fr] md:gap-12 md:pt-[80px]">
+    <section className="relative mx-auto max-w-[1440px] overflow-hidden bg-[#F4EFE7] px-6 md:px-12">
+      <div className="grid min-h-screen items-center gap-8 pt-[44px] md:grid-cols-[1fr_1fr] md:gap-12 md:pt-[40px]">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -211,12 +211,12 @@ function HeroSection() {
             Our Services
           </p>
           
-          <h1 className="text-[40px] font-normal leading-[1.1] tracking-[-0.02em] text-[#111827] sm:text-[50px] md:text-[56px] lg:text-[64px]">
+          <h1 className="text-[40px] font-normal leading-[1.1] tracking-[-0.02em] text-[#2A211D] sm:text-[50px] md:text-[56px] lg:text-[64px]">
             Strategy. Design. Technology.{" "}
             <span className="text-[#3B82F6]">Growth.</span>
           </h1>
           
-          <p className="mt-6 max-w-[480px] text-[14px] leading-[1.6] text-[#111827]/70 md:text-[15px]">
+          <p className="mt-6 max-w-[480px] text-[14px] leading-[1.6] text-[#2A211D]/70 md:text-[15px]">
             End-to-end digital solutions that transform your business. From strategy to execution, we deliver results that matter.
           </p>
         </motion.div>
@@ -234,7 +234,7 @@ function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="absolute left-[10%] top-[15%] z-20 rounded-2xl bg-white p-3 shadow-xl md:left-[5%]"
           >
-            <div className="h-[200px] w-[280px] rounded-xl bg-gradient-to-br from-[#F8F9FA] to-[#E5E7EB] md:h-[250px] md:w-[350px]">
+            <div className="h-[200px] w-[280px] rounded-xl bg-gradient-to-br from-[#F4EFE7] to-[#E5E7EB] md:h-[250px] md:w-[350px]">
               <div className="flex h-full flex-col p-4">
                 <div className="mb-3 h-2 w-1/3 rounded-full bg-[#3B82F6]/20" />
                 <div className="space-y-2">
@@ -265,7 +265,7 @@ function HeroSection() {
                 <p className="text-[10px] font-semibold tracking-wider text-[#3B82F6] uppercase">
                   More visibility
                 </p>
-                <p className="text-[12px] font-medium text-[#111827]">More growth.</p>
+                <p className="text-[12px] font-medium text-[#2A211D]">More growth.</p>
               </div>
             </div>
           </motion.div>
@@ -285,7 +285,7 @@ function HeroSection() {
                 <p className="text-[10px] font-semibold tracking-wider text-[#3B82F6] uppercase">
                   Global Reach
                 </p>
-                <p className="text-[11px] text-[#111827]/70">India, US, UK & beyond</p>
+                <p className="text-[11px] text-[#2A211D]/70">India, US, UK & beyond</p>
               </div>
             </div>
           </motion.div>
@@ -307,12 +307,24 @@ function HeroSection() {
 
 // Services Showcase Section
 function ServicesShowcase() {
-  const [activeService, setActiveService] = useState(0); // Default to Web Design & Development (index 0)
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams.get('service');
+  const [activeService, setActiveService] = useState(serviceParam ? parseInt(serviceParam) : 0); // Default to Web Design & Development (index 0)
+
+  // Update activeService when URL parameter changes
+  useEffect(() => {
+    if (serviceParam !== null) {
+      const serviceIndex = parseInt(serviceParam);
+      if (!isNaN(serviceIndex) && serviceIndex >= 0 && serviceIndex < servicesData.length) {
+        setActiveService(serviceIndex);
+      }
+    }
+  }, [serviceParam]);
 
   const activeServiceData = servicesData[activeService];
 
   return (
-    <section className="mx-auto max-w-[1440px] bg-[#F8F9FA] px-6 py-16 md:px-12 md:py-24">
+    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
       <div className="grid gap-8 md:grid-cols-[1fr_1.2fr]">
         {/* Left Column - Tab Navigation */}
         <div className="space-y-4">
@@ -333,7 +345,7 @@ function ServicesShowcase() {
                   className={`font-sans text-[14px] font-semibold ${
                     activeService === index
                       ? "text-[#3B82F6]"
-                      : "text-[#111827]/50"
+                      : "text-[#2A211D]/50"
                   }`}
                 >
                   {service.id}
@@ -341,8 +353,8 @@ function ServicesShowcase() {
                 <span
                   className={`font-sans text-[14px] font-medium ${
                     activeService === index
-                      ? "text-[#111827]"
-                      : "text-[#111827]/70"
+                      ? "text-[#2A211D]"
+                      : "text-[#2A211D]/70"
                   }`}
                 >
                   {service.title}
@@ -358,7 +370,7 @@ function ServicesShowcase() {
             transition={{ delay: 0.8 }}
             className="mt-8 pt-4"
           >
-            <p className="font-sans text-[13px] text-[#111827]/70">
+            <p className="font-sans text-[13px] text-[#2A211D]/70">
               Let's turn your ideas into digital success.{" "}
               <ArrowRight size={14} className="inline text-[#3B82F6]" />
             </p>
@@ -381,12 +393,12 @@ function ServicesShowcase() {
             </p>
 
             {/* Heading */}
-            <h2 className="mb-4 text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-[#111827] md:text-[32px]">
+            <h2 className="mb-4 text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-[#2A211D] md:text-[32px]">
               {activeServiceData.heading}
             </h2>
 
             {/* Description */}
-            <p className="mb-8 text-[14px] leading-[1.7] text-[#111827]/70 md:text-[15px]">
+            <p className="mb-8 text-[14px] leading-[1.7] text-[#2A211D]/70 md:text-[15px]">
               {activeServiceData.description}
             </p>
 
@@ -397,29 +409,29 @@ function ServicesShowcase() {
                   <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#3B82F6]/10">
                     <Check size={12} className="text-[#3B82F6]" />
                   </div>
-                  <span className="text-[13px] text-[#111827]/80">{feature}</span>
+                  <span className="text-[13px] text-[#2A211D]/80">{feature}</span>
                 </div>
               ))}
             </div>
 
             {/* Visual Graphic Area */}
-            <div className="relative rounded-2xl bg-gradient-to-br from-[#F8F9FA] to-[#E5E7EB] p-6">
+            <div className="relative rounded-2xl bg-gradient-to-br from-[#F4EFE7] to-[#E5E7EB] p-6">
               {/* Kanban-style dashboard preview */}
               <div className="mb-4 flex gap-3">
                 <div className="flex-1 rounded-lg bg-white p-3 shadow-sm">
-                  <p className="mb-2 text-[10px] font-semibold text-[#111827]/50 uppercase">
+                  <p className="mb-2 text-[10px] font-semibold text-[#2A211D]/50 uppercase">
                     New
                   </p>
                   <div className="h-2 w-3/4 rounded-full bg-[#3B82F6]/20" />
                 </div>
                 <div className="flex-1 rounded-lg bg-white p-3 shadow-sm">
-                  <p className="mb-2 text-[10px] font-semibold text-[#111827]/50 uppercase">
+                  <p className="mb-2 text-[10px] font-semibold text-[#2A211D]/50 uppercase">
                     Contacted
                   </p>
                   <div className="h-2 w-1/2 rounded-full bg-[#3B82F6]/20" />
                 </div>
                 <div className="flex-1 rounded-lg bg-white p-3 shadow-sm">
-                  <p className="mb-2 text-[10px] font-semibold text-[#111827]/50 uppercase">
+                  <p className="mb-2 text-[10px] font-semibold text-[#2A211D]/50 uppercase">
                     Qualified
                   </p>
                   <div className="h-2 w-1/3 rounded-full bg-[#3B82F6]/20" />
@@ -428,7 +440,7 @@ function ServicesShowcase() {
 
               {/* Sales Pipeline chart card */}
               <div className="absolute bottom-4 right-4 rounded-xl bg-white p-3 shadow-lg">
-                <p className="mb-2 text-[9px] font-semibold text-[#111827]/50 uppercase">
+                <p className="mb-2 text-[9px] font-semibold text-[#2A211D]/50 uppercase">
                   Sales Pipeline
                 </p>
                 <div className="flex items-end gap-1">
@@ -483,7 +495,7 @@ function ProcessSection() {
   ];
 
   return (
-    <section className="mx-auto max-w-[1440px] bg-[#F8F9FA] px-6 py-16 md:px-12 md:py-24">
+    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
       <div className="rounded-3xl bg-[#3B82F6]/5 p-8 md:p-12">
         <div className="grid gap-12 md:grid-cols-[1fr_1.2fr]">
           {/* Left Header */}
@@ -496,10 +508,10 @@ function ProcessSection() {
             <p className="mb-4 font-sans text-[10px] font-semibold tracking-[0.2em] text-[#3B82F6] uppercase">
               — Our Process
             </p>
-            <h2 className="mb-4 text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-[#111827] md:text-[32px]">
+            <h2 className="mb-4 text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-[#2A211D] md:text-[32px]">
               From strategy to steady growth.
             </h2>
-            <p className="text-[14px] leading-[1.6] text-[#111827]/70 md:text-[15px]">
+            <p className="text-[14px] leading-[1.6] text-[#2A211D]/70 md:text-[15px]">
               A proven methodology that transforms ideas into measurable results, 
               ensuring every step aligns with your business objectives.
             </p>
@@ -523,10 +535,10 @@ function ProcessSection() {
                   <p className="font-sans text-[12px] font-semibold text-[#3B82F6]">
                     {step.number}
                   </p>
-                  <h3 className="text-[16px] font-semibold text-[#111827]">
+                  <h3 className="text-[16px] font-semibold text-[#2A211D]">
                     {step.title}
                   </h3>
-                  <p className="mt-1 text-[13px] text-[#111827]/60">
+                  <p className="mt-1 text-[13px] text-[#2A211D]/60">
                     {step.description}
                   </p>
                 </div>
@@ -548,7 +560,7 @@ function ProcessSection() {
 // Bottom CTA Banner
 function CTABanner() {
   return (
-    <section className="mx-auto max-w-[1440px] bg-[#F8F9FA] px-6 py-16 md:px-12 md:py-24">
+    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -562,7 +574,7 @@ function CTABanner() {
             <p className="mb-3 font-sans text-[10px] font-semibold tracking-[0.2em] text-[#3B82F6] uppercase">
               Ready to get started?
             </p>
-            <h2 className="text-[24px] font-normal leading-[1.2] tracking-[-0.02em] text-[#111827] md:text-[28px]">
+            <h2 className="text-[24px] font-normal leading-[1.2] tracking-[-0.02em] text-[#2A211D] md:text-[28px]">
               Let's build a smarter system for{" "}
               <span className="text-[#3B82F6]">your business.</span>
             </h2>
@@ -576,7 +588,7 @@ function CTABanner() {
             >
               Get in touch <ArrowRight size={14} />
             </Link>
-            <p className="text-[13px] text-[#111827]/60">
+            <p className="text-[13px] text-[#2A211D]/60">
               Have a question? We're here to help.
             </p>
           </div>
@@ -589,7 +601,7 @@ function CTABanner() {
 // Main Services Page Component
 export default function ServicesPageComponent() {
   return (
-    <div className="min-h-screen bg-[#F8F9FA]">
+    <div className="min-h-screen bg-[#F4EFE7]">
       <ServicesHeader />
       <main className="pt-[50px]">
         <HeroSection />

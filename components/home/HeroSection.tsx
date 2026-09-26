@@ -16,6 +16,15 @@ type Project = {
   tone: string;
 };
 
+type CardOffset = {
+  x: number;
+  y: number;
+  z: number;
+  rotate: number;
+  scale: number;
+  zIndex?: number;
+};
+
 const projects: Project[] = [
   {
     client: "AUREL DIAMOND",
@@ -63,7 +72,7 @@ function getWheelOffset(index: number, active: number, total: number) {
   return raw > total / 2 ? raw - total : raw;
 }
 
-function getCardTransform(offset: number) {
+function getCardTransform(offset: number): CardOffset {
   if (offset === 0) {
     return { x: 0, y: 0, z: 80, rotate: 0, scale: 1, zIndex: 30 };
   }
@@ -81,11 +90,32 @@ function ProjectCard({
   counterLabel,
 }: {
   project: Project;
-  offset: number;
+  offset: number | CardOffset;
   counterLabel: string;
 }) {
-  const isCenter = offset === 0;
-  const { x, y, z, rotate, scale, zIndex } = getCardTransform(offset);
+  const isCenter = typeof offset === 'number' ? offset === 0 : offset.x === 0;
+
+  // Handle deck-style offset for mobile/tablet (object) vs wheel offset for desktop (number)
+  const deckTransform = typeof offset === 'object' ? offset : null;
+  const wheelOffset = typeof offset === 'number' ? offset : null;
+
+  let x, y, z, rotate, scale, zIndex;
+  if (deckTransform) {
+    x = deckTransform.x;
+    y = deckTransform.y;
+    z = deckTransform.z;
+    rotate = deckTransform.rotate;
+    scale = deckTransform.scale;
+    zIndex = deckTransform.zIndex || 30;
+  } else {
+    const transform = getCardTransform(wheelOffset || 0);
+    x = transform.x;
+    y = transform.y;
+    z = transform.z;
+    rotate = transform.rotate;
+    scale = transform.scale;
+    zIndex = transform.zIndex || 30;
+  }
 
   return (
     // Static centering wrapper (Tailwind handles the responsive size +
@@ -139,6 +169,17 @@ function ProjectShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
   const resumeTimeoutRef = useRef<number | undefined>(undefined);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile/tablet
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Auto-advance the showcase on its own, pausing briefly whenever the
   // user manually interacts (drag/swipe) so it doesn't fight them.
@@ -156,17 +197,28 @@ function ProjectShowcase() {
     return () => window.clearTimeout(resumeTimeoutRef.current);
   }, []);
 
-  // Auto-scroll on mobile
+  // Scroll-based card shuffle on mobile/tablet
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     if (!isMobile) return;
 
-    const interval = setInterval(() => {
-      setActive((current) => (current + 1) % projects.length);
-    }, 4000);
+    const handleScroll = () => {
+      const heroSection = document.getElementById('top');
+      if (!heroSection) return;
 
-    return () => clearInterval(interval);
-  }, []);
+      const heroRect = heroSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate progress based on scroll
+      const scrollProgress = Math.max(0, Math.min(1, -heroRect.top / (heroRect.height - windowHeight)));
+
+      // Map scroll progress to card index
+      const newActive = Math.min(Math.floor(scrollProgress * projects.length), projects.length - 1);
+      setActive(Math.max(0, newActive));
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMobile]);
 
   const handleDragEnd = (
     _event: unknown,
@@ -178,6 +230,38 @@ function ProjectShowcase() {
     } else if (info.offset.x > 60) {
       setActive((current) => (current - 1 + projects.length) % projects.length);
       pauseAutoAdvance();
+    }
+  };
+
+  // Get deck-style offset for mobile/tablet
+  const getDeckOffset = (index: number, activeIndex: number, total: number): CardOffset => {
+    const diff = index - activeIndex;
+    const totalWidth = 280;
+    const stackOffset = 8;
+
+    if (diff === 0) {
+      // Active card - front and center
+      return { x: 0, y: 0, z: 0, rotate: 0, scale: 1, zIndex: 30 };
+    } else if (diff > 0) {
+      // Cards after active - stacked to the right
+      return {
+        x: diff * stackOffset,
+        y: diff * 2,
+        z: -diff * 20,
+        rotate: diff * 2,
+        scale: 1 - diff * 0.1,
+        zIndex: 30 - diff * 5
+      };
+    } else {
+      // Cards before active - stacked to the left
+      return {
+        x: diff * stackOffset,
+        y: -diff * 2,
+        z: -Math.abs(diff) * 20,
+        rotate: diff * 2,
+        scale: 1 - Math.abs(diff) * 0.1,
+        zIndex: 30 - Math.abs(diff) * 5
+      };
     }
   };
 
@@ -193,21 +277,21 @@ function ProjectShowcase() {
 
       <motion.div
         className="absolute inset-0 z-10 flex cursor-grab items-center justify-center active:cursor-grabbing"
-        style={{ perspective: "1600px" }}
+        style={{ perspective: isMobile ? "800px" : "1600px" }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.15}
         onDragEnd={handleDragEnd}
       >
         <div
-          className="relative h-full w-[400px] md:w-[780px]"
+          className={`relative h-full ${isMobile ? 'w-[280px]' : 'w-[400px] md:w-[780px]'}`}
           style={{ transformStyle: "preserve-3d" }}
         >
           {projects.map((project, index) => (
             <ProjectCard
               key={project.client}
               project={project}
-              offset={getWheelOffset(index, active, projects.length)}
+              offset={isMobile ? getDeckOffset(index, active, projects.length) : getWheelOffset(index, active, projects.length)}
               counterLabel={`${String(active + 1).padStart(2, "0")} / ${String(
                 projects.length
               ).padStart(2, "0")}`}
@@ -395,7 +479,7 @@ export function HeroSection() {
 
           <a
             href="#portfolio"
-            className="group mt-8 inline-flex items-center gap-3 border-b border-[#2A211D]/30 pb-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-[#2A211D]"
+            className="group mt-4 inline-flex items-center gap-3 border-b border-[#2A211D]/30 pb-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-[#2A211D]"
           >
             Explore our work
             <ArrowRight
