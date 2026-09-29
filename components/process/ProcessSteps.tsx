@@ -65,7 +65,7 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <section id="process" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(4rem,8vw,6.5rem)]">
+    <section id="process" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(2.75rem,5vw,4.5rem)]">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 24 }}

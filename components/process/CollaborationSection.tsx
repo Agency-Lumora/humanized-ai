@@ -12,7 +12,7 @@ const relationship = [
 
 export function CollaborationSection() {
   return (
-    <section className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(4rem,8vw,6.5rem)]">
+    <section className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(2.75rem,5vw,4.5rem)]">
       <Container>
         <div className="grid gap-14 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
           <motion.div

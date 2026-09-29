@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { FinalCTA } from "@/components/ui/FinalCTA";
 
 // Service data with detailed content
 const servicesData = [
@@ -557,47 +558,6 @@ function ProcessSection() {
   );
 }
 
-// Bottom CTA Banner
-function CTABanner() {
-  return (
-    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="rounded-3xl bg-[#3B82F6]/10 p-8 md:p-12"
-      >
-        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-          {/* Left Content */}
-          <div className="max-w-[600px]">
-            <p className="mb-3 font-sans text-[10px] font-semibold tracking-[0.2em] text-[#3B82F6] uppercase">
-              Ready to get started?
-            </p>
-            <h2 className="text-[24px] font-normal leading-[1.2] tracking-[-0.02em] text-[#2A211D] md:text-[28px]">
-              Let's build a smarter system for{" "}
-              <span className="text-[#3B82F6]">your business.</span>
-            </h2>
-          </div>
-
-          {/* Right Action */}
-          <div className="flex flex-col items-start gap-3 md:items-end">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 rounded-full bg-[#3B82F6] px-6 py-3 font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-white transition-transform hover:-translate-y-0.5"
-            >
-              Get in touch <ArrowRight size={14} />
-            </Link>
-            <p className="text-[13px] text-[#2A211D]/60">
-              Have a question? We're here to help.
-            </p>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
-
 // Main Services Page Component
 export default function ServicesPageComponent() {
   return (
@@ -607,7 +567,7 @@ export default function ServicesPageComponent() {
         <HeroSection />
         <ServicesShowcase />
         <ProcessSection />
-        <CTABanner />
+        <FinalCTA />
       </main>
     </div>
   );

@@ -21,7 +21,7 @@ const journey = [
 
 export function ProcessHero() {
   return (
-    <section className="relative mx-auto max-w-[1440px] overflow-x-clip px-6 pb-[clamp(3rem,7vw,5rem)] pt-[clamp(7rem,12vw,9.5rem)] md:px-12">
+    <section className="relative mx-auto max-w-[1440px] overflow-x-clip px-6 pb-[clamp(2.5rem,5vw,3.5rem)] pt-[clamp(6rem,9vw,7.5rem)] md:px-12">
       <div className="grid gap-14 md:grid-cols-[0.95fr_1.05fr] md:items-center md:gap-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

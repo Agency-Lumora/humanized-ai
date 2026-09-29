@@ -2,8 +2,8 @@
 
 import { Footer } from "@/components/home/Footer";
 import { Header } from "@/components/home/HeroSection";
+import { FinalCTA } from "@/components/ui/FinalCTA";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Caveat } from "next/font/google";
 
@@ -302,75 +302,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ============ OUR WHY / FINAL CTA ============ */}
-        <section className="relative mx-auto max-w-[1440px] px-6 py-[clamp(3rem,6vw,4.5rem)] md:px-12">
-          <motion.div
-            {...reveal}
-            className="relative overflow-hidden rounded-[28px] bg-[#5A4030] px-7 py-12 text-[#F6F3ED] md:px-14 md:py-16"
-          >
-            {/* decorative circular emblem */}
-            <div className="absolute right-8 top-8 hidden h-24 w-24 overflow-hidden rounded-full sm:block">
-              <Image src="/footer-stamp.png" alt="" fill aria-hidden="true" className="object-cover" />
-            </div>
-            {/* decorative sand wave along the bottom */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full opacity-40" aria-hidden="true">
-              <Image src="/footer-waves.png" alt="" fill className="object-cover object-bottom" />
-            </div>
-
-            <div className="relative grid gap-12 md:grid-cols-[1.1fr_1px_0.9fr] md:gap-0">
-              <div className="md:pr-12">
-                <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#D8C3A8]">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#D8C3A8]/50 text-[10px]">
-                    04
-                  </span>
-                  Our Why
-                </p>
-                <h2 className="mt-6 font-serif text-[clamp(2rem,3.4vw,2.9rem)] font-normal leading-[1.1] tracking-[-0.025em] text-[#F6F3ED]">
-                  So I built Lumora.
-                </h2>
-                <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-[#F6F3ED]/75">
-                  A digital agency for businesses that have something worth saying,
-                  but need the right way to say it. We bring together strategy,
-                  brand, design, development, and technology to turn ideas into
-                  digital experiences that feel considered, useful, and unmistakably
-                  yours.
-                </p>
-                <p className="mt-5 max-w-xl text-[15px] font-semibold leading-[1.75] text-[#F6F3ED]">
-                  We don&apos;t make businesses look like everyone else.
-                </p>
-              </div>
-
-              <div className="hidden bg-[#F6F3ED]/15 md:block" />
-
-              <div className="flex flex-col justify-between md:pl-12">
-                <div>
-                  <p className="text-[16px] leading-[1.6] text-[#F6F3ED]/85">
-                    You&apos;ve already built something worth believing in.
-                  </p>
-                  <p className="mt-4 text-[16px] leading-[1.6] text-[#F6F3ED]/85">
-                    Let&apos;s make sure your digital presence says the same.
-                  </p>
-                </div>
-
-                <motion.a
-                  href="/contact"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="mt-10 inline-flex w-fit items-center gap-3 rounded-full bg-[#BFD8E8] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2A2522] transition-transform"
-                >
-                  Let&apos;s work together <ArrowRight size={14} />
-                </motion.a>
-              </div>
-            </div>
-
-            <div className="relative mt-14 text-right md:mt-16">
-              <p className="font-serif text-lg tracking-[0.14em] text-[#F6F3ED]/70">LUMORA</p>
-              <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-[#D8C3A8]/70">
-                A brighter online presence
-              </p>
-            </div>
-          </motion.div>
-        </section>
+        <FinalCTA />
       </main>
       <Footer />
     </div>

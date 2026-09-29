@@ -14,7 +14,7 @@ const caveat = Caveat({
 
 export function OwnershipSection() {
   return (
-    <section className="border-b border-[#806C5D]/20 bg-[#AFC4CE] py-[clamp(4rem,8vw,6.5rem)]">
+    <section className="border-b border-[#806C5D]/20 bg-[#AFC4CE] py-[clamp(2.75rem,5vw,4.5rem)]">
       <div className="mx-auto max-w-[80rem] px-6 sm:px-8 lg:px-12">
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
           <motion.div

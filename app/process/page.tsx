@@ -5,7 +5,7 @@ import { ProcessSteps } from "@/components/process/ProcessSteps";
 import { OwnershipSection } from "@/components/process/OwnershipSection";
 import { CollaborationSection } from "@/components/process/CollaborationSection";
 import { ExpectationsSection } from "@/components/process/ExpectationsSection";
-import { ProcessCTA } from "@/components/process/ProcessCTA";
+import { FinalCTA } from "@/components/ui/FinalCTA";
 
 export const metadata = { title: "Process | Lumora Agency", description: "See Lumora's thoughtful process from discovery through launch and growth." };
 
@@ -19,7 +19,7 @@ export default function ProcessPage() {
         <OwnershipSection />
         <CollaborationSection />
         <ExpectationsSection />
-        <ProcessCTA />
+        <FinalCTA />
       </main>
       <Footer />
     </div>

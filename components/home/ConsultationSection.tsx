@@ -68,18 +68,18 @@ function CTAButton({ children, href }: { children: React.ReactNode; href: string
       className="group relative inline-block w-full sm:w-auto"
     >
       <motion.div
-        className="relative z-10 flex min-h-[68px] w-full min-w-0 items-center justify-center gap-5 border border-transparent px-7 py-4 text-[#2A211D] sm:min-w-[340px] sm:px-9"
+        className="relative z-10 flex min-h-[50px] w-full min-w-0 items-center justify-center gap-4 border border-transparent px-6 py-3 text-[#2A211D] sm:min-w-[260px] sm:px-7"
         animate={{
           backgroundColor: isHovered ? "#F4EFE7" : "#AFC4CE",
           borderColor: isHovered ? "rgba(128, 108, 93, 0.5)" : "rgba(128, 108, 93, 0)",
         }}
         transition={transition}
       >
-        <span className="text-[13px] font-bold uppercase tracking-[0.16em]">
+        <span className="text-[12px] font-bold uppercase tracking-[0.16em]">
           {children}
         </span>
         <motion.div
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-lg"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base"
           animate={{
             scale: isHovered ? 1 : 0.8,
             backgroundColor: isHovered ? "#AFC4CE" : "rgba(175, 196, 206, 0)",
@@ -106,7 +106,7 @@ export default function ConsultationSection() {
     <section
       id="consultation"
       ref={containerRef}
-      className="relative overflow-hidden bg-[#2A211D] py-[clamp(4rem,8vw,6rem)]"
+      className="relative overflow-hidden bg-[#2A211D] py-[clamp(2.75rem,5vw,4rem)]"
     >
       {/* Animated background elements */}
       <motion.div
@@ -138,10 +138,10 @@ export default function ConsultationSection() {
             <p className="text-[9px] font-semibold uppercase tracking-[0.35em] text-[#AFC4CE]">
               Ready to start?
             </p>
-            <h2 className="mx-auto mt-4 max-w-5xl font-serif text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] tracking-[-0.03em] text-[#F4EFE7]">
+            <h2 className="mx-auto mt-3 max-w-5xl font-serif text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.05] tracking-[-0.03em] text-[#F4EFE7]">
               WHAT SHOULD WE
             </h2>
-            <h2 className="mx-auto max-w-5xl font-serif text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] tracking-[-0.03em] text-[#AFC4CE]">
+            <h2 className="mx-auto max-w-5xl font-serif text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.05] tracking-[-0.03em] text-[#AFC4CE]">
               BUILD <NextToNowWord />
             </h2>
           </motion.div>
@@ -152,7 +152,7 @@ export default function ConsultationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-base leading-7 text-[#F4EFE7]/70"
+            className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#F4EFE7]/70"
           >
             Your competitors aren&apos;t waiting. You shouldn&apos;t either.
             
@@ -164,7 +164,7 @@ export default function ConsultationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8"
+            className="mt-6"
           >
             <CTAButton href="https://wa.me/917383172979?text=Hi%20Lumora,%20I'd%20like%20to%20discuss%20a%20project.">
               Now or Never
@@ -177,7 +177,7 @@ export default function ConsultationSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-8 flex items-center justify-center gap-8 text-xs text-[#F4EFE7]/50"
+            className="mt-5 flex items-center justify-center gap-8 text-xs text-[#F4EFE7]/50"
           >
             <span>Systems built for businesses that don&apos;t have time to stay small.</span>
           </motion.div>
