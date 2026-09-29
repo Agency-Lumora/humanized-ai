@@ -9,10 +9,9 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
   },
   compress: true,
-  swcMinify: true,
   poweredByHeader: false,
   generateEtags: true,
-  httpHeaders: async () => {
+  headers: async () => {
     return [
       {
         source: '/:path*',

@@ -220,6 +220,14 @@ function ProjectShowcase() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
 
+  const pauseAutoAdvance = () => {
+    window.clearTimeout(resumeTimeoutRef.current);
+    setIsPaused(true);
+    resumeTimeoutRef.current = window.setTimeout(() => {
+      setIsPaused(false);
+    }, AUTO_ADVANCE_RESUME_DELAY);
+  };
+
   const handleDragEnd = (
     _event: unknown,
     info: { offset: { x: number } }

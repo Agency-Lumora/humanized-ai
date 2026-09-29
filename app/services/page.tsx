@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Footer } from "@/components/home/Footer";
 import ServicesPageComponent from "@/components/services/ServicesPage";
 
@@ -6,7 +7,9 @@ export const metadata = { title: "Services | Lumora Agency", description: "Explo
 export default function ServicesPageWrapper() {
   return (
     <>
-      <ServicesPageComponent />
+      <Suspense fallback={null}>
+        <ServicesPageComponent />
+      </Suspense>
       <Footer />
     </>
   );
