@@ -29,7 +29,7 @@ const projects: Project[] = [
   {
     client: "AUREL DIAMOND",
     eyebrow: "AUREL",
-    image: "/aurel.png",
+    image: "/aurel-original.jpeg",
     headline: "Timeless\nElegance.",
     subline: "Fine jewellery",
     tone: "#F7F3EC",
@@ -37,7 +37,7 @@ const projects: Project[] = [
   {
     client: "NARRATIV.",
     eyebrow: "NARRATIV.",
-    image: "/narrativ-mark.png",
+    image: "/narrativ-original.jpeg",
     headline: "Better Ideas.\nBigger Results.",
     subline: "Beauty & lifestyle",
     tone: "#DDECF2",
@@ -45,7 +45,7 @@ const projects: Project[] = [
   {
     client: "LET'S TALK NAILS",
     eyebrow: "NAILS BY NI",
-    image: "/nails.jpeg",
+    image: "/nails-original.jpeg",
     headline: "The art of\neveryday elegance.",
     subline: "Contemporary fashion",
     tone: "#F4E8DB",
