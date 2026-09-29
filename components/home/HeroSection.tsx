@@ -445,8 +445,8 @@ export function HeroSection() {
     >
       <Header />
 
-      <div className="sticky top-0 h-screen px-6 md:px-12">
-      <div className="grid h-full items-center gap-8 pb-8 pt-[100px] md:grid-cols-[0.9fr_1.1fr] md:gap-2 md:pb-[94px] md:pt-[80px]">
+      <div className="sticky top-0 min-h-screen px-6 md:h-screen md:px-12">
+      <div className="grid h-full content-start items-center gap-8 pb-8 pt-[100px] md:grid-cols-[0.9fr_1.1fr] md:content-normal md:gap-2 md:pb-[94px] md:pt-[80px]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}

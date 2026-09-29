@@ -70,6 +70,7 @@ export default ProcessSection;*/
 
 import { useRef, useState } from "react";
 import {
+  AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
@@ -493,8 +494,10 @@ export function ProcessSection() {
   const stepsRef = useRef<HTMLDivElement>(null);
 
   // Drive the active step continuously off real scroll position (rather than
-  // a one-shot "enters viewport" trigger) so the sticky graphic updates in
-  // lockstep with scrolling in both directions, with no delayed "stuck" jump.
+  // a one-shot "enters viewport" trigger) so the pinned graphic + text pair
+  // update in lockstep with scrolling in both directions, with no delayed
+  // "stuck" jump. Same behavior on every breakpoint — only the layout
+  // (stacked vs. side-by-side) changes responsively below.
   const { scrollYProgress } = useScroll({
     target: stepsRef,
     offset: ["start start", "end end"],
@@ -507,6 +510,20 @@ export function ProcessSection() {
     );
     setActiveIndex((current) => (current === index ? current : index));
   });
+
+  // Lets the step navigator jump straight to a given step by scrolling the
+  // page to the point inside the driver track where scrollYProgress will
+  // resolve to that step's index.
+  const scrollToStep = (index: number) => {
+    const el = stepsRef.current;
+    if (!el) return;
+    const scrollableHeight = el.offsetHeight - window.innerHeight;
+    if (scrollableHeight <= 0) return;
+    const targetProgress = index / (process.length - 1);
+    const targetY =
+      window.scrollY + el.getBoundingClientRect().top + targetProgress * scrollableHeight;
+    window.scrollTo({ top: targetY, behavior: reducedMotion ? "auto" : "smooth" });
+  };
 
   return (
     <section
@@ -538,130 +555,89 @@ export function ProcessSection() {
           </div>
         </div>
 
-        {/* Experimental process layout */}
-        <div className="mt-16 block lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
-          {/* Graphic workspace */}
-          <div className="sticky top-20 z-10 self-start bg-[#F4EFE7] pb-5 md:top-24 lg:top-28 lg:pb-0">
-            <ProcessGraphic
-              activeIndex={activeIndex}
-              reducedMotion={reducedMotion}
-            />
+        {/* =====================================================
+            The image and its matching step swap together, in
+            place, driven by scroll position — on every breakpoint.
+            The actual scrollable distance is this driver track;
+            everything visible inside it is pinned via `sticky`.
+            Layout stacks on mobile/tablet, sits side-by-side at lg+.
+        ===================================================== */}
+        <div
+          ref={stepsRef}
+          className="relative mt-14 h-[230vh] sm:h-[260vh] lg:h-[300vh]"
+        >
+          <div className="sticky top-20 grid min-h-[calc(100vh-5rem)] grid-cols-1 items-center gap-8 bg-[#F4EFE7] py-8 md:top-24 md:min-h-[calc(100vh-6rem)] lg:top-28 lg:min-h-[calc(100vh-7rem)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+            <div>
+              <ProcessGraphic
+                activeIndex={activeIndex}
+                reducedMotion={reducedMotion}
+              />
 
-            <div className="mt-5 flex items-center justify-between">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-[#6B584B]">
-                From idea to impact
-              </p>
-              <p className="font-mono text-[10px] text-[#806C5D]">
-                {`${String(activeIndex + 1).padStart(2, "0")} — 05`}
-              </p>
+              <div className="mt-5 flex items-center justify-between">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-[#6B584B]">
+                  From idea to impact
+                </p>
+                <p className="font-mono text-[10px] text-[#806C5D]">
+                  {`${String(activeIndex + 1).padStart(2, "0")} — 05`}
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Scroll-responsive process steps */}
-          <div ref={stepsRef} className="relative">
-            <div className="space-y-4 lg:space-y-0">
-              {process.map((item, index) => {
-                const isActive = activeIndex === index;
+            <div className="relative h-[230px] self-center sm:h-[260px] lg:h-[300px]">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={process[activeIndex].number}
+                  className="absolute inset-x-0 top-0"
+                  style={{ willChange: "transform, opacity" }}
+                  initial={reducedMotion ? false : { opacity: 0, y: 48 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reducedMotion ? undefined : { opacity: 0, y: -48 }}
+                  transition={{
+                    duration: reducedMotion ? 0 : 0.4,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#88C5E8] bg-[#88C5E8] font-mono text-[10px] text-[#35251B]">
+                      {process[activeIndex].number}
+                    </span>
+                    <h3 className="font-serif text-[clamp(1.45rem,2.8vw,2.4rem)] tracking-[-0.035em] text-[#35251B]">
+                      {process[activeIndex].title}
+                    </h3>
+                    <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-[#6B584B]">
+                      {process[activeIndex].keyword}
+                    </span>
+                  </div>
 
-                return (
-                  <motion.article
+                  <p className="mt-5 max-w-[420px] text-[13px] leading-6 text-[#6B584B] lg:mt-6 lg:text-[15px] lg:leading-7">
+                    {process[activeIndex].description}
+                  </p>
+
+                  <div className="mt-6 h-px w-full max-w-[420px] bg-[#88C5E8] lg:mt-7" />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Step navigator — click/tap to jump straight to a step */}
+              <div className="mt-7 flex items-center gap-2.5 lg:mt-8">
+                {process.map((item, index) => (
+                  <button
                     key={item.number}
-                    className="relative flex min-h-[34vh] items-center sm:min-h-[30vh] lg:min-h-[52vh] lg:items-center"
-                    initial={
-                      reducedMotion
-                        ? false
-                        : { opacity: 0, y: 24 }
-                    }
-                    whileInView={
-                      reducedMotion
-                        ? undefined
-                        : { opacity: 1, y: 0 }
-                    }
-                    viewport={{
-                      once: true,
-                      amount: 0.25,
-                    }}
-                    transition={{
-                      duration: 0.65,
-                      delay: reducedMotion ? 0 : index * 0.04,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
+                    type="button"
+                    onClick={() => scrollToStep(index)}
+                    aria-current={activeIndex === index}
+                    aria-label={`Jump to ${item.title}`}
+                    className="group py-1.5"
                   >
-                    <motion.button
-                      type="button"
-                      className="group block w-full cursor-pointer rounded-2xl border border-transparent p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#88C5E8] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4EFE7] lg:p-7"
-                      onClick={() => setActiveIndex(index)}
-                      aria-pressed={isActive}
-                      animate={{
-                        opacity: isActive ? 1 : 0.5,
-                        y: isActive || reducedMotion ? 0 : 10,
-                      }}
-                      transition={{
-                        duration: reducedMotion ? 0 : 0.6,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      <div className="flex flex-wrap items-center gap-3">
-                        <motion.span
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border font-mono text-[10px]"
-                          animate={{
-                            backgroundColor: isActive ? "#88C5E8" : "#F4EFE7",
-                            borderColor: isActive ? "#88C5E8" : "rgba(128,108,93,0.3)",
-                          }}
-                          transition={{ duration: reducedMotion ? 0 : 0.3 }}
-                        >
-                          {item.number}
-                        </motion.span>
-                        <h3
-                          className={`font-serif text-[clamp(1.45rem,2.5vw,2rem)] tracking-[-0.035em] transition-colors duration-300 ${
-                            isActive
-                              ? "text-[#35251B]"
-                              : "text-[#806C5D]"
-                          }`}
-                        >
-                          {item.title}
-                        </h3>
-
-                        <span
-                          className={`ml-auto text-[10px] uppercase tracking-[0.18em] transition-opacity duration-300 ${
-                            isActive
-                              ? "opacity-100 text-[#6B584B]"
-                              : "opacity-0 text-[#6B584B] group-hover:opacity-100"
-                          }`}
-                        >
-                          {item.keyword}
-                        </span>
-                      </div>
-
-                      <motion.div
-                        initial={false}
-                        animate={{
-                          height: isActive ? "auto" : 0,
-                          opacity: isActive ? 1 : 0,
-                          marginTop: isActive ? 12 : 0,
-                        }}
-                        transition={{
-                          duration: reducedMotion ? 0 : 0.35,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-[390px] text-[13px] leading-6 text-[#6B584B]">
-                          {item.description}
-                        </p>
-                      </motion.div>
-
-                      <div
-                        className={`mt-5 h-px w-full transition-colors duration-300 ${
-                          isActive
-                            ? "bg-[#88C5E8]"
-                            : "bg-[#806C5D]/15"
-                        }`}
-                      />
-                    </motion.button>
-                  </motion.article>
-                );
-              })}
+                    <span
+                      className={`block h-1.5 rounded-full transition-all duration-300 ${
+                        activeIndex === index
+                          ? "w-8 bg-[#88C5E8]"
+                          : "w-3 bg-[#806C5D]/25 group-hover:bg-[#806C5D]/45"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

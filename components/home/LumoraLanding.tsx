@@ -16,8 +16,11 @@ import { FAQSection } from "./FAQSection";
 import PortfolioSection from "./PortfolioSection";
 import { Footer } from "./Footer";
 
+// Module-level flag: persists across client-side navigations, resets on full page load
+let introPlayed = false;
+
 export function LumoraLanding() {
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(() => !introPlayed);
   const [isMounted, setIsMounted] = useState(false);
   useLenis();
 
@@ -29,7 +32,7 @@ export function LumoraLanding() {
     <MotionConfig
       transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
     >
-      {isMounted && showLoading && <LoadingScreen onComplete={() => setShowLoading(false)} duration={1.8} />}
+      {isMounted && showLoading && <LoadingScreen onComplete={() => { introPlayed = true; setShowLoading(false); }} duration={1.8} />}
       <div className="min-h-screen bg-[#F4EFE7] text-[#2A211D]">
         <main>
           <HeroSection />
