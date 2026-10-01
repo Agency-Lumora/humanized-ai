@@ -80,8 +80,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/opengraph-image.png",
-        width: 1200,
-        height: 630,
+        width: 1024,
+        height: 540,
         alt: "Lumora",
       },
     ],
@@ -133,7 +133,7 @@ export default function RootLayout({
               name: "Lumora DIgital Agency",
               url: "https://agencylumora.com",
               logo: "https://agencylumora.com/logo.png",
-              image: "https://agencylumora.com/og-image.jpg",
+              image: "https://agencylumora.com/opengraph-image.png",
               description:
                 "Lumora designs and develops websites, creates brand identities, and provides SEO, CRM, and AI integrations. We build with you, then teach you how to manage it yourself with 1 month of free support.",
               email: "hello@agencylumora.com",
