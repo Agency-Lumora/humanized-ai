@@ -81,7 +81,7 @@ export const metadata: Metadata = {
       {
         url: "/opengraph-image.png",
         width: 1024,
-        height: 540,
+        height: 571,
         alt: "Lumora",
       },
     ],
