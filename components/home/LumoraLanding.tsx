@@ -16,11 +16,16 @@ import { FAQSection } from "./FAQSection";
 import PortfolioSection from "./PortfolioSection";
 import { Footer } from "./Footer";
 
-// Module-level flag: persists across client-side navigations, resets on full page load
-let introPlayed = false;
+// Session flag: persists across client-side navigations AND hard page
+// reloads within the same browser tab/session, only resetting once the
+// tab/session actually ends.
+const INTRO_SESSION_KEY = "lumora-intro-played";
 
 export function LumoraLanding() {
-  const [showLoading, setShowLoading] = useState(() => !introPlayed);
+  const [showLoading, setShowLoading] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem(INTRO_SESSION_KEY) !== "true";
+  });
   const [isMounted, setIsMounted] = useState(false);
   useLenis();
 
@@ -32,7 +37,7 @@ export function LumoraLanding() {
     <MotionConfig
       transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
     >
-      {isMounted && showLoading && <LoadingScreen onComplete={() => { introPlayed = true; setShowLoading(false); }} duration={1.8} />}
+      {isMounted && showLoading && <LoadingScreen onComplete={() => { sessionStorage.setItem(INTRO_SESSION_KEY, "true"); setShowLoading(false); }} duration={1.8} />}
       <div className="min-h-screen bg-[#F4EFE7] text-[#2A211D]">
         <main>
           <HeroSection />

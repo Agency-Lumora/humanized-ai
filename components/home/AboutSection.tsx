@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const stats = [
@@ -17,17 +18,23 @@ export function AboutSection() {
       <div className="mx-auto max-w-[80rem] px-6 sm:px-8 lg:px-12">
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
           {/* Image */}
-          {/* TODO: replace this placeholder with a real studio/team photo
-              asset once one is available (no suitable existing image asset
-              was found in the project). */}
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             data-motion-reveal
-            className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#DCE7EA] to-[#AFC4CE]"
-          />
+            className="relative aspect-[1003/837] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#DCE7EA] to-[#AFC4CE]"
+          >
+            <Image
+              src="/about-collage.jpg"
+              alt="Collage of a workspace, a hand typing on a laptop, and a notebook sketching ideas, strategy, execution, and growth"
+              fill
+              sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
+              className="object-contain"
+              priority={false}
+            />
+          </motion.div>
 
           {/* Content */}
           <motion.div

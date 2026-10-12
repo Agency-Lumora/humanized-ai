@@ -5,9 +5,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const projects = [
-  { number: "01", name: "LET'S TALK NAILS × NAILS BY NI", category: "Branding · Social Media", headline: "From nail work → to a recognizable brand.", image: "/nails.png", shape: "rect" },
-  { number: "02", name: "NARRATIV.", category: "Website Design · Development", headline: "A marketing agency's website should market itself.", image: "/narrativ-mark.png", shape: "circle" },
-  { number: "03", name: "AUREL DIAMOND", category: "Logo Design · Brand Identity", headline: "When the brief keeps changing, clarity becomes part of the craft.", image: "/aurel.png", shape: "rect" },
+  { number: "01", name: "LET'S TALK NAILS × NAILS BY NI", category: "Branding · Social Media", headline: "From nail work → to a recognizable brand.", image: "/nails-original.jpeg", tone: "#F4E8DB" },
+  { number: "02", name: "NARRATIV.", category: "Website Design · Development", headline: "A marketing agency's website should market itself.", image: "/narrativ-original.jpeg", tone: "#DDECF2" },
+  { number: "03", name: "AUREL DIAMOND", category: "Logo Design · Brand Identity", headline: "When the brief keeps changing, clarity becomes part of the craft.", image: "/aurel-original.jpeg", tone: "#F7F3EC" },
 ] as const;
 
 export default function PortfolioSection() {
@@ -24,7 +24,7 @@ export default function PortfolioSection() {
             <motion.article key={project.number} initial={{ opacity: 0, y: 40, scale: 0.95 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 1.0, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }} className="border-b border-[#806C5D]/25 pt-5 lg:border-b-0 lg:border-r lg:pr-6 lg:last:border-r-0">
               <Link href="/portfolio" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#806C5D] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4EFE7]">
                 <div className="flex items-start justify-between gap-3"><span className="font-serif text-2xl leading-none tracking-[-0.04em] text-[#AFC4CE]">{project.number}</span><span className="max-w-[11rem] text-right text-[9px] font-semibold uppercase tracking-[0.16em] text-[#806C5D]">{project.category}</span></div>
-                <div className={`relative mt-4 mx-auto overflow-hidden border border-[#806C5D]/20 bg-[#DCE7EA] transition-transform duration-500 ease-out group-hover:-translate-y-1 ${project.shape === "circle" ? "aspect-square w-[62%] rounded-full sm:w-[55%]" : "aspect-[3/2]"}`}><Image src={project.image} alt={`${project.name} project preview`} fill sizes="(min-width: 1024px) 30vw, 100vw" className={project.shape === "circle" ? "object-contain p-6" : "object-cover"} /></div>
+                <div style={{ backgroundColor: project.tone }} className="relative mt-4 mx-auto aspect-[3/2] overflow-hidden border border-[#806C5D]/20 transition-transform duration-500 ease-out group-hover:-translate-y-1"><Image src={project.image} alt={`${project.name} project preview`} fill sizes="(min-width: 1024px) 30vw, 100vw" className="object-cover" /></div>
                 <h3 className="mt-5 font-serif text-[clamp(1.05rem,1.6vw,1.3rem)] leading-[1.15] tracking-[-0.02em] text-[#35251B]">{project.name}</h3>
                 <p className="mt-2 max-w-sm font-serif text-[15px] leading-[1.3] text-[#35251B]/80">“{project.headline}”</p>
                 <span className="mt-4 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#806C5D]">Read case study <span className="transition-transform duration-500 group-hover:translate-x-1">→</span></span>

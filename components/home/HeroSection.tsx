@@ -401,7 +401,7 @@ export function Header() {
 
       <Link
         href="/contact"
-        className="hidden items-center gap-3 rounded-full bg-[#DCE7EA] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.1em] text-[#2A211D] transition-transform hover:-translate-y-0.5 md:flex"
+        className="hidden items-center gap-3 rounded-full bg-[#3B2314] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.1em] text-[#F4EFE7] transition-transform hover:-translate-y-0.5 md:flex"
       >
         Let&apos;s create <ArrowRight size={13} strokeWidth={1.4} />
       </Link>

@@ -1,6 +1,7 @@
 import EditorialPortfolio from "@/components/portfolio/EditorialPortfolio";
 import { Footer } from "@/components/home/Footer";
 import { Header } from "@/components/home/HeroSection";
+import ConsultationSection from "@/components/home/ConsultationSection";
 
 export const metadata = {
   title: "Portfolio | Lumora Agency",
@@ -12,6 +13,7 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-[#F4EFE7] pt-[50px]">
       <Header />
       <EditorialPortfolio />
+      <ConsultationSection />
       <Footer />
     </div>
   );

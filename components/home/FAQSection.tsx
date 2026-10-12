@@ -14,7 +14,7 @@ export function FAQSection() {
   };
 
   return (
-    <section id="faqs" className="border-b border-[#806C5D]/20 bg-[#F4EFE7] py-[clamp(3rem,5vw,4.5rem)]">
+    <section id="faqs" className="border-b border-[#806C5D]/20 bg-white py-[clamp(3rem,5vw,4.5rem)]">
       <Container>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }} className="mb-[clamp(1.5rem,2.5vw,2rem)]">
           <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806C5D]">Common questions</p>

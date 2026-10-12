@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" fill="none" role="img" aria-label="Soft sculptural illustration for the Discover step">
+  <defs>
+    <linearGradient id="s1-beige" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7EEE1" />
+      <stop offset="100%" stop-color="#D9C3A3" />
+    </linearGradient>
+    <linearGradient id="s1-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D7ECF6" />
+      <stop offset="55%" stop-color="#96C6E1" />
+      <stop offset="100%" stop-color="#5E93B8" />
+    </linearGradient>
+    <radialGradient id="s1-dot" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#5C4433" />
+      <stop offset="100%" stop-color="#2D2016" />
+    </radialGradient>
+    <filter id="s1-shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#2A211D" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <circle cx="132" cy="96" r="70" fill="url(#s1-beige)" opacity="0.95" />
+
+  <path
+    d="M66 64 C84 42 118 38 136 56 C154 74 166 56 180 72 C194 88 190 116 170 128 C164 132 166 144 154 152 C138 162 114 160 100 146 C82 128 60 130 52 112 C44 94 50 78 66 64 Z"
+    fill="url(#s1-blue)"
+    filter="url(#s1-shadow)"
+  />
+
+  <circle cx="190" cy="40" r="6" fill="url(#s1-dot)" />
+
+  <path d="M16 128 C 32 136 40 154 36 174" stroke="#8B6F57" stroke-width="1.2" stroke-linecap="round" opacity="0.5" fill="none" />
+</svg>

@@ -71,7 +71,7 @@ function CTAButton({ children, href }: { children: React.ReactNode; href: string
         className="relative z-10 flex min-h-[50px] w-full min-w-0 items-center justify-center gap-4 border border-transparent px-6 py-3 text-[#2A211D] sm:min-w-[260px] sm:px-7"
         animate={{
           backgroundColor: isHovered ? "#F4EFE7" : "#AFC4CE",
-          borderColor: isHovered ? "rgba(128, 108, 93, 0.5)" : "rgba(128, 108, 93, 0)",
+          borderColor: isHovered ? "rgba(244, 239, 231, 0.5)" : "rgba(244, 239, 231, 0)",
         }}
         transition={transition}
       >
@@ -106,7 +106,7 @@ export default function ConsultationSection() {
     <section
       id="consultation"
       ref={containerRef}
-      className="relative overflow-hidden bg-[#2A211D] py-[clamp(2.75rem,5vw,4rem)]"
+      className="relative overflow-hidden bg-[#3B2314] py-[clamp(2.75rem,5vw,4rem)]"
     >
       {/* Animated background elements */}
       <motion.div

@@ -12,7 +12,7 @@ const brands = [
 
 export function BrandsSection() {
   return (
-    <section className="relative overflow-hidden border-y border-[#806C5D]/15 bg-[#806C5D] py-8 sm:py-9">
+    <section className="relative overflow-hidden border-y border-[#806C5D]/15 bg-[#3B2314] py-8 sm:py-9">
       <div className="mx-auto max-w-[80rem] px-6 sm:px-8 lg:px-12">
         <motion.p
           initial={{ opacity: 0, y: 10 }}

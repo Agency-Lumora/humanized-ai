@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { FinalCTA } from "@/components/ui/FinalCTA";
+import ConsultationSection from "@/components/home/ConsultationSection";
 
 // Service data with detailed content
 const servicesData = [
@@ -146,7 +146,7 @@ function ServicesHeader() {
             aria-current={pathname === link.href ? "page" : undefined}
             className={`font-sans text-[11px] uppercase tracking-[0.1em] transition-opacity hover:opacity-60 ${
               pathname === link.href 
-                ? "text-[#3B82F6] font-semibold" 
+                ? "text-[#6EA9C7] font-semibold" 
                 : "text-[#2A211D]/80"
             }`}
           >
@@ -157,7 +157,7 @@ function ServicesHeader() {
 
       <Link
         href="/contact"
-        className="hidden items-center gap-3 rounded-full bg-[#3B82F6] px-5 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-white transition-transform hover:-translate-y-0.5 md:flex"
+        className="hidden items-center gap-3 rounded-full bg-[#3B2314] px-5 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-[#F4EFE7] transition-transform hover:-translate-y-0.5 md:flex"
       >
         LET'S CREATE <ArrowRight size={13} strokeWidth={1.4} />
       </Link>
@@ -200,7 +200,7 @@ function ServicesHeader() {
 function HeroSection() {
   return (
     <section className="relative mx-auto max-w-[1440px] overflow-hidden bg-[#F4EFE7] px-6 md:px-12">
-      <div className="grid min-h-screen items-center gap-8 pt-[44px] md:grid-cols-[1fr_1fr] md:gap-12 md:pt-[40px]">
+      <div className="grid items-center gap-8 pt-[100px] pb-16 md:grid-cols-[1fr_1fr] md:gap-12 md:pb-20 md:pt-[120px]">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -312,12 +312,14 @@ function ServicesShowcase() {
   const serviceParam = searchParams.get('service');
   const [activeService, setActiveService] = useState(serviceParam ? parseInt(serviceParam) : 0); // Default to Web Design & Development (index 0)
 
-  // Update activeService when URL parameter changes
+  // Update activeService when URL parameter changes, and scroll this
+  // section into view so a footer deep-link doesn't just land on the hero.
   useEffect(() => {
     if (serviceParam !== null) {
       const serviceIndex = parseInt(serviceParam);
       if (!isNaN(serviceIndex) && serviceIndex >= 0 && serviceIndex < servicesData.length) {
         setActiveService(serviceIndex);
+        document.getElementById("services-explorer")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   }, [serviceParam]);
@@ -325,7 +327,7 @@ function ServicesShowcase() {
   const activeServiceData = servicesData[activeService];
 
   return (
-    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
+    <section id="services-explorer" className="mx-auto max-w-[1440px] scroll-mt-24 bg-white px-6 py-16 md:px-12 md:py-24">
       <div className="grid gap-8 md:grid-cols-[1fr_1.2fr]">
         {/* Left Column - Tab Navigation */}
         <div className="space-y-4">
@@ -336,7 +338,7 @@ function ServicesShowcase() {
               className={`w-full rounded-2xl p-4 text-left transition-all duration-300 ${
                 activeService === index
                   ? "bg-[#3B82F6]/10"
-                  : "hover:bg-white/50"
+                  : "hover:bg-[#F4EFE7]"
               }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -386,7 +388,7 @@ function ServicesShowcase() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4 }}
-            className="rounded-3xl bg-white p-8 shadow-sm md:p-10"
+            className="rounded-3xl bg-[#F4EFE7] p-8 shadow-sm md:p-10"
           >
             {/* Section label */}
             <p className="mb-4 font-sans text-[10px] font-semibold tracking-[0.2em] text-[#3B82F6] uppercase">
@@ -496,8 +498,8 @@ function ProcessSection() {
   ];
 
   return (
-    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
-      <div className="rounded-3xl bg-[#3B82F6]/5 p-8 md:p-12">
+    <section className="mx-auto max-w-[1440px] bg-[#F4EFE7] px-6 py-12 md:px-12 md:py-16">
+      <div className="rounded-3xl bg-[#3B82F6]/5 p-6 md:p-10">
         <div className="grid gap-12 md:grid-cols-[1fr_1.2fr]">
           {/* Left Header */}
           <motion.div
@@ -567,7 +569,7 @@ export default function ServicesPageComponent() {
         <HeroSection />
         <ServicesShowcase />
         <ProcessSection />
-        <FinalCTA />
+        <ConsultationSection />
       </main>
     </div>
   );

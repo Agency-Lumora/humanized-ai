@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" fill="none" role="img" aria-label="Soft sculptural illustration for the Build step">
+  <defs>
+    <linearGradient id="s4-beige" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7EEE1" />
+      <stop offset="100%" stop-color="#D9C3A3" />
+    </linearGradient>
+    <linearGradient id="s4-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D7ECF6" />
+      <stop offset="55%" stop-color="#96C6E1" />
+      <stop offset="100%" stop-color="#5E93B8" />
+    </linearGradient>
+    <radialGradient id="s4-dot" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#5C4433" />
+      <stop offset="100%" stop-color="#2D2016" />
+    </radialGradient>
+    <filter id="s4-shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#2A211D" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <path
+    d="M60 70 C 30 90 28 140 60 166 C 90 190 136 182 150 152 C 128 164 100 156 88 132 C 76 108 88 82 112 76 C 96 64 76 62 60 70 Z"
+    fill="url(#s4-beige)"
+    filter="url(#s4-shadow)"
+  />
+  <path
+    d="M150 90 C 168 86 182 100 180 118 C 178 134 160 142 146 134 C 158 128 162 112 150 104 C 142 98 142 92 150 90 Z"
+    fill="url(#s4-blue)"
+  />
+
+  <circle cx="178" cy="54" r="6" fill="url(#s4-dot)" />
+</svg>

@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { featuredWork } from "@/lib/content";
 import { ProjectPreview } from "@/components/portfolio/ProjectPreview";
 import { Footer } from "@/components/home/Footer";
+import ConsultationSection from "@/components/home/ConsultationSection";
 
 export async function generateStaticParams() {
   return featuredWork.map((p) => ({ slug: p.slug }));
@@ -78,6 +79,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
         {otherProjects.length > 0 && <section className="py-[clamp(4rem,8vw,6rem)]"><div className="mx-auto max-w-[80rem] px-[clamp(1rem,3vw,3rem)]"><div className="flex items-end justify-between"><div><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#806C5D]">Continue exploring</p><h2 className="mt-4 font-serif text-4xl">More work from Lumora</h2></div></div><div className="mt-10 grid gap-8 sm:grid-cols-2">{otherProjects.map((other) => <Link key={other.slug} href={`/portfolio/${other.slug}`} className="group block border border-[#806C5D]/25 bg-[#DCE7EA]/35 p-4 transition hover:-translate-y-1 sm:p-6"><ProjectPreview project={other} /><div className="mt-5 flex items-end justify-between"><div><p className="text-[9px] uppercase tracking-[0.2em] text-[#806C5D]">{other.category}</p><h3 className="mt-2 font-serif text-2xl">{other.title}</h3></div><ArrowUpRight className="h-5 w-5 transition group-hover:translate-x-1 group-hover:-translate-y-1" /></div></Link>)}</div></div></section>}
       </main>
+      <ConsultationSection />
       <Footer />
     </div>
   );

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" fill="none" role="img" aria-label="Soft sculptural beige form representing the Agency stage">
+  <defs>
+    <linearGradient id="as-circle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7EEE1" />
+      <stop offset="100%" stop-color="#E6D3B4" />
+    </linearGradient>
+    <linearGradient id="as-blob" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C9AD8C" />
+      <stop offset="100%" stop-color="#8B6F57" />
+    </linearGradient>
+    <filter id="as-shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#2A211D" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <circle cx="110" cy="110" r="100" fill="url(#as-circle)" />
+
+  <path
+    d="M110 56 C132 54 150 70 156 90 C162 110 150 118 160 134 C170 150 156 168 136 166 C128 180 104 182 90 168 C70 168 56 148 64 128 C54 112 64 90 82 84 C86 66 94 58 110 56 Z"
+    fill="url(#as-blob)"
+    filter="url(#as-shadow)"
+  />
+</svg>

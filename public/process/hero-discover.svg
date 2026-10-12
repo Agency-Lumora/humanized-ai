@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none" role="img" aria-label="Soft sculptural illustration representing the Discover stage">
+  <defs>
+    <linearGradient id="hd-beige" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7EEE1" />
+      <stop offset="100%" stop-color="#D9C3A3" />
+    </linearGradient>
+    <linearGradient id="hd-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D7ECF6" />
+      <stop offset="55%" stop-color="#96C6E1" />
+      <stop offset="100%" stop-color="#5E93B8" />
+    </linearGradient>
+    <radialGradient id="hd-dot" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#5C4433" />
+      <stop offset="100%" stop-color="#2D2016" />
+    </radialGradient>
+    <filter id="hd-shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#2A211D" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <circle cx="246" cy="176" r="132" fill="url(#hd-beige)" opacity="0.95" />
+
+  <path
+    d="M126 118 C154 84 206 78 236 104 C266 130 282 100 304 128 C326 156 318 206 288 226 C278 232 282 252 262 266 C236 284 198 282 176 260 C150 234 118 236 104 206 C90 176 100 150 126 118 Z"
+    fill="url(#hd-blue)"
+    filter="url(#hd-shadow)"
+  />
+
+  <circle cx="345" cy="76" r="9" fill="url(#hd-dot)" />
+
+  <path d="M28 232 C 56 246 70 276 64 312" stroke="#8B6F57" stroke-width="1.4" stroke-linecap="round" opacity="0.55" fill="none" />
+  <path d="M52 248 C 78 262 88 292 80 326" stroke="#8B6F57" stroke-width="1.2" stroke-linecap="round" opacity="0.4" fill="none" />
+</svg>
