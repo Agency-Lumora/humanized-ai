@@ -85,6 +85,11 @@ export async function POST(req: Request) {
   `,
     });
 
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error }, { status: 500 });
+    }
+
    const { error: clientEmailError } = await resend.emails.send({
       from: "Lumora Digital Agency <hello@agencylumora.com>",
       to: [data.email],
@@ -141,11 +146,6 @@ export async function POST(req: Request) {
       await appendLeadToSheet(data);
     } catch (sheetError) {
       console.error("Google Sheets append error:", sheetError);
-    }
-
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
