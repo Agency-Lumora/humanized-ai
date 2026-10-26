@@ -39,7 +39,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact-form" className="relative overflow-hidden bg-white py-[clamp(3.5rem,7vw,6.5rem)]">
+    <section id="contact-form" className="relative overflow-hidden bg-[#F4EFE7] py-[clamp(3.5rem,7vw,6.5rem)]">
       <div className="mx-auto grid max-w-[1440px] gap-12 px-6 sm:px-10 lg:grid-cols-[minmax(0,.78fr)_minmax(0,1fr)] lg:items-center lg:gap-14 lg:px-12 xl:grid-cols-[minmax(300px,.78fr)_minmax(470px,1fr)_230px] xl:gap-10">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }} className="relative z-10 max-w-[390px]">
           <p className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.22em] text-[#6EA9C7]"><span className="h-px w-10 bg-[#6EA9C7]/60" />Get in touch</p>
@@ -58,7 +58,7 @@ export function ContactSection() {
           </div>
         </motion.div>
 
-        <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }} className="relative z-10 rounded-[15px] border border-[#806C5D]/15 bg-[#F4EFE7]/70 p-5 shadow-[0_22px_55px_rgba(42,33,29,0.08)] backdrop-blur-sm sm:p-8">
+        <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }} className="relative z-10 rounded-[15px] border border-white/90 bg-white/70 p-5 shadow-[0_22px_55px_rgba(42,33,29,0.08)] backdrop-blur-sm sm:p-8">
           <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.22em] text-[#6EA9C7]">Send us a message</p>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <label className="text-[11px] text-[#2A211D]/70">Name <span className="text-[#6EA9C7]">*</span><input className={inputClassName} required value={formData.full_name} onChange={(event) => updateField("full_name", event.target.value)} placeholder="Your name" /></label>

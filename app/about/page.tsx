@@ -95,7 +95,7 @@ export default function AboutPage() {
         </section>
 
         {/* ============ THE REALIZATION ============ */}
-        <section className="relative bg-white px-6 py-[clamp(5rem,9vw,8.25rem)] md:px-12">
+        <section className="relative bg-[#F0EAE0] px-6 py-[clamp(5rem,9vw,8.25rem)] md:px-12">
           <div className="mx-auto max-w-[1440px]">
             <motion.div {...reveal}>
               <SectionLabel number="01">The Realization</SectionLabel>
@@ -166,7 +166,7 @@ export default function AboutPage() {
         </section>
 
         {/* ============ MEET THE FOUNDER ============ */}
-        <section className="relative bg-[#F4EFE7] px-6 py-[clamp(5rem,9vw,8.25rem)] md:px-12">
+        <section className="relative bg-[#F6F3ED] px-6 py-[clamp(5rem,9vw,8.25rem)] md:px-12">
           <div className="mx-auto max-w-[1440px]">
             <div className="grid gap-14 md:grid-cols-[0.85fr_1fr] md:items-center md:gap-16">
               <motion.div
@@ -238,7 +238,7 @@ export default function AboutPage() {
         </section>
 
         {/* ============ BY THE NUMBERS ============ */}
-        <section className="relative bg-white px-6 py-[clamp(4rem,7vw,6.25rem)] md:px-12">
+        <section className="relative bg-[#F0EAE0] px-6 py-[clamp(4rem,7vw,6.25rem)] md:px-12">
           <div className="mx-auto max-w-[1440px]">
             <motion.div {...reveal}>
               <SectionLabel number="03">By the Numbers</SectionLabel>

@@ -327,7 +327,7 @@ function ServicesShowcase() {
   const activeServiceData = servicesData[activeService];
 
   return (
-    <section id="services-explorer" className="mx-auto max-w-[1440px] scroll-mt-24 bg-white px-6 py-16 md:px-12 md:py-24">
+    <section id="services-explorer" className="mx-auto max-w-[1440px] scroll-mt-24 bg-[#F4EFE7] px-6 py-16 md:px-12 md:py-24">
       <div className="grid gap-8 md:grid-cols-[1fr_1.2fr]">
         {/* Left Column - Tab Navigation */}
         <div className="space-y-4">
@@ -338,7 +338,7 @@ function ServicesShowcase() {
               className={`w-full rounded-2xl p-4 text-left transition-all duration-300 ${
                 activeService === index
                   ? "bg-[#3B82F6]/10"
-                  : "hover:bg-[#F4EFE7]"
+                  : "hover:bg-white/50"
               }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -388,7 +388,7 @@ function ServicesShowcase() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4 }}
-            className="rounded-3xl bg-[#F4EFE7] p-8 shadow-sm md:p-10"
+            className="rounded-3xl bg-white p-8 shadow-sm md:p-10"
           >
             {/* Section label */}
             <p className="mb-4 font-sans text-[10px] font-semibold tracking-[0.2em] text-[#3B82F6] uppercase">
