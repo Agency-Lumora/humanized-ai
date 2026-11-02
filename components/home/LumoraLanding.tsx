@@ -22,14 +22,12 @@ import { Footer } from "./Footer";
 const INTRO_SESSION_KEY = "lumora-intro-played";
 
 export function LumoraLanding() {
-  const [showLoading, setShowLoading] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return sessionStorage.getItem(INTRO_SESSION_KEY) !== "true";
-  });
+  const [showLoading, setShowLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   useLenis();
 
   useEffect(() => {
+    if (sessionStorage.getItem(INTRO_SESSION_KEY) === "true") setShowLoading(false);
     setIsMounted(true);
   }, []);
 
@@ -37,6 +35,7 @@ export function LumoraLanding() {
     <MotionConfig
       transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
     >
+      {!isMounted && <div className="fixed inset-0 z-9999 bg-[#2A211D]" />}
       {isMounted && showLoading && <LoadingScreen onComplete={() => { sessionStorage.setItem(INTRO_SESSION_KEY, "true"); setShowLoading(false); }} duration={1.8} />}
       <div className="min-h-screen bg-[#F4EFE7] text-[#2A211D]">
         <main>
